@@ -42,7 +42,7 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
 
    // private final InstanceContent content = new InstanceContent();
 
-    private final ExplorerManager em=new ExplorerManager();
+    private final ExplorerManager mgr=new ExplorerManager();
     
     public MyEditorTopComponent() {
         initComponents();
@@ -50,12 +50,12 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
 
-        associateLookup(ExplorerUtils.createLookup(em, getActionMap()));
+        associateLookup(ExplorerUtils.createLookup(mgr, getActionMap()));
         
         setLayout(new BorderLayout());
         add(new BeanTreeView(), BorderLayout.CENTER);
         
-        em.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
+        mgr.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
         
         Event e = new Event();
         jTextField1.setText(e.getIndex() + "");
@@ -170,6 +170,6 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
     public ExplorerManager getExplorerManager() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-        return em;
+        return mgr;
     }
 }
