@@ -11,6 +11,8 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.TopComponent;
+import org.openide.windows.WindowManager;
 
 @ActionID(
         category = "Window",
@@ -25,7 +27,9 @@ public final class SomeAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // TODO implement action body
         System.out.println("ndljava");
-        new ArageFrame().setVisible(true);
-        
+         
+        TopComponent win = WindowManager.getDefault().findTopComponent("wccccTopComponent");
+        win.open();
+       // win.requestActive();
     }
 }
