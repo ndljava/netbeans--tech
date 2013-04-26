@@ -41,11 +41,17 @@ public final class MyEditorTopComponent extends TopComponent {
 
     public MyEditorTopComponent() {
         initComponents();
- 
+
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
-        
+
         associateLookup(new AbstractLookup(content));
+
+        Event e = new Event();
+        jTextField1.setText(e.getIndex() + "");
+        jTextField2.setText(e.getDate().toString());
+
+        content.set(Collections.singleton(e), null);
     }
 
     /**
@@ -59,6 +65,7 @@ public final class MyEditorTopComponent extends TopComponent {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jTextField1.setText(org.openide.util.NbBundle.getMessage(MyEditorTopComponent.class, "MyEditorTopComponent.jTextField1.text")); // NOI18N
 
@@ -68,6 +75,13 @@ public final class MyEditorTopComponent extends TopComponent {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jButton2, org.openide.util.NbBundle.getMessage(MyEditorTopComponent.class, "MyEditorTopComponent.jButton2.text")); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -83,8 +97,10 @@ public final class MyEditorTopComponent extends TopComponent {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(245, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(74, 74, 74))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,22 +111,25 @@ public final class MyEditorTopComponent extends TopComponent {
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jButton1)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jButton2)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Event e = new Event();
-        jTextField1.setText(e.getIndex() + "");
-        jTextField2.setText(e.getDate().toString());
-
-        content.set(Collections.singleton(e), null);
-
         new MyEditorTopComponent().open();
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
