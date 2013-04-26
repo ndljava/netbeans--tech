@@ -13,11 +13,12 @@ import java.util.Date;
 public class Event {
 
     private Date date;
-    private int count = 0;
+    private static int count = 0;
     private int index = 0;
 
     public Event() {
         index = count++;
+        date=new Date();
     }
 
     public Date getDate() {

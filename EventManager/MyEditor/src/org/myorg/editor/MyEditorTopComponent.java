@@ -4,11 +4,13 @@
  */
 package org.myorg.editor;
 
+import org.myorg.api.Event;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
+import org.openide.util.lookup.Lookups;
 
 /**
  * Top component which displays something.
@@ -33,13 +35,17 @@ import org.openide.util.NbBundle.Messages;
 })
 public final class MyEditorTopComponent extends TopComponent {
 
-    
-    
     public MyEditorTopComponent() {
         initComponents();
+
+        Event e = new Event();
+        associateLookup(Lookups.singleton(e));
+
+        jTextField1.setText(e.getIndex() + "");
+        jTextField2.setText(e.getDate().toString());
+
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
-
     }
 
     /**
@@ -95,9 +101,10 @@ public final class MyEditorTopComponent extends TopComponent {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         
-    }//GEN-LAST:event_jButton1ActionPerformed
 
+        new MyEditorTopComponent().open();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
