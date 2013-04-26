@@ -31,7 +31,7 @@ import org.openide.util.NbBundle.Messages;
     "CTL_MyEditorTopComponent=MyEditor Window",
     "HINT_MyEditorTopComponent=This is a MyEditor window"
 })
-public final class MyEditorTopComponent extends TopComponent {
+public final class MyEditorTopComponent extends TopComponent{
 
     public MyEditorTopComponent() {
         initComponents();
