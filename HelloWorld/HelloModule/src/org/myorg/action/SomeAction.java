@@ -4,9 +4,9 @@
  */
 package org.myorg.action;
 
-import com.frame.ui.Upanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import org.myorg.hello.wccccTopComponent;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
@@ -27,11 +27,11 @@ public final class SomeAction implements ActionListener {
         // TODO implement action body
         System.out.println("ndljava");
 
-        // TopComponent win = new wccccTopComponent();
-        TopComponent win = new TopComponent();
+         TopComponent win = new wccccTopComponent();
+       // TopComponent win = new TopComponent();
 
-        win.add(new Upanel());
-        win.setDisplayName("ssss");
+        //win.add(new Upanel());
+        //win.setDisplayName("ssss");
         win.open();
         win.requestActive();
 

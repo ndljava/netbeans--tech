@@ -4,11 +4,7 @@
  */
 package org.myorg.hello;
 
-import javax.swing.JComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
-import org.netbeans.core.spi.multiview.CloseOperationState;
-import org.netbeans.core.spi.multiview.MultiViewElement;
-import org.netbeans.core.spi.multiview.MultiViewElementCallback;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.windows.TopComponent;
@@ -41,7 +37,7 @@ public final class wccccTopComponent extends TopComponent{
         initComponents();
         setName(Bundle.CTL_wccccTopComponent());
         setToolTipText(Bundle.HINT_wccccTopComponent());
-        putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
+ 
 
     }
 

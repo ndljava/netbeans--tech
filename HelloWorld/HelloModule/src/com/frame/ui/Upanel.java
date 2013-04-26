@@ -4,11 +4,13 @@
  */
 package com.frame.ui;
 
+import org.openide.windows.TopComponent;
+
 /**
  *
  * @author Administrator
  */
-public class Upanel extends javax.swing.JPanel {
+public class Upanel extends TopComponent {
 
     /**
      * Creates new form Upanel
