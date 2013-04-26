@@ -33,6 +33,8 @@ import org.openide.util.NbBundle.Messages;
 })
 public final class MyEditorTopComponent extends TopComponent {
 
+    
+    
     public MyEditorTopComponent() {
         initComponents();
         setName(Bundle.CTL_MyEditorTopComponent());
@@ -57,6 +59,11 @@ public final class MyEditorTopComponent extends TopComponent {
         jTextField2.setText(org.openide.util.NbBundle.getMessage(MyEditorTopComponent.class, "MyEditorTopComponent.jTextField2.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(MyEditorTopComponent.class, "MyEditorTopComponent.jButton1.text")); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,6 +92,12 @@ public final class MyEditorTopComponent extends TopComponent {
                 .addContainerGap(140, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
