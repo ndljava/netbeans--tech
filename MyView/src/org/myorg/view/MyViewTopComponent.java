@@ -51,8 +51,8 @@ public final class MyViewTopComponent extends TopComponent implements LookupList
         putClientProperty(TopComponent.PROP_SLIDING_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_UNDOCKING_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_KEEP_PREFERRED_SIZE_WHEN_SLIDED_IN, Boolean.TRUE);
-
         
+        System.out.println("view open");
         
         
     }
