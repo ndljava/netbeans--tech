@@ -6,7 +6,9 @@
             <code-name-base>org.myorg.api</code-name-base>
             <suite-component/>
             <module-dependencies/>
-            <public-packages/>
+            <public-packages>
+                <package>org.myorg.api</package>
+            </public-packages>
         </data>
     </configuration>
 </project>
