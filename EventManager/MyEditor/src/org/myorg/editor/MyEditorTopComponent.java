@@ -4,11 +4,17 @@
  */
 package org.myorg.editor;
 
+import java.awt.BorderLayout;
 import java.util.Collections;
 import org.myorg.api.Event;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.explorer.ExplorerManager;
+import org.openide.explorer.ExplorerUtils;
+import org.openide.explorer.view.BeanTreeView;
+import org.openide.nodes.AbstractNode;
+import org.openide.nodes.Children;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.lookup.AbstractLookup;
@@ -35,23 +41,31 @@ import org.openide.util.lookup.InstanceContent;
     "CTL_MyEditorTopComponent=MyEditor Window",
     "HINT_MyEditorTopComponent=This is a MyEditor window"
 })
-public final class MyEditorTopComponent extends TopComponent {
+public final class MyEditorTopComponent extends TopComponent implements ExplorerManager.Provider{
 
-    private final InstanceContent content = new InstanceContent();
+   // private final InstanceContent content = new InstanceContent();
 
+    private final ExplorerManager em=new ExplorerManager();
+    
     public MyEditorTopComponent() {
         initComponents();
 
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
 
-        associateLookup(new AbstractLookup(content));
+        associateLookup(ExplorerUtils.createLookup(em, getActionMap()));
 
+        
+        setLayout(new BorderLayout());
+        add(new BeanTreeView(), BorderLayout.CENTER);
+        
+        em.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
+        
         Event e = new Event();
         jTextField1.setText(e.getIndex() + "");
         jTextField2.setText(e.getDate().toString());
 
-        content.set(Collections.singleton(e), null);
+       // content.set(Collections.singleton(e), null);
     }
 
     /**
@@ -154,5 +168,12 @@ public final class MyEditorTopComponent extends TopComponent {
     void readProperties(java.util.Properties p) {
         String version = p.getProperty("version");
         // TODO read your settings according to their version
+    }
+
+    @Override
+    public ExplorerManager getExplorerManager() {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return em;
     }
 }

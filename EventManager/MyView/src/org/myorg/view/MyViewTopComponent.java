@@ -5,6 +5,7 @@
 package org.myorg.view;
 
 import java.util.Collection;
+import java.util.Iterator;
 import org.myorg.api.Event;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
@@ -37,10 +38,10 @@ import org.openide.util.Utilities;
     "CTL_MyViewTopComponent=MyView Window",
     "HINT_MyViewTopComponent=This is a MyView window"
 })
-public final class MyViewTopComponent extends TopComponent implements LookupListener{
+public final class MyViewTopComponent extends TopComponent implements LookupListener {
 
     private Lookup.Result<Event> result;
-    
+
     public MyViewTopComponent() {
         initComponents();
         setName(Bundle.CTL_MyViewTopComponent());
@@ -92,7 +93,7 @@ public final class MyViewTopComponent extends TopComponent implements LookupList
     @Override
     public void componentOpened() {
         // TODO add custom code on component opening
-        result= Utilities.actionsGlobalContext().lookupResult(Event.class);
+        result = Utilities.actionsGlobalContext().lookupResult(Event.class);
         result.addLookupListener(this);
     }
 
@@ -116,16 +117,31 @@ public final class MyViewTopComponent extends TopComponent implements LookupList
     @Override
     public void resultChanged(LookupEvent le) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        Collection<? extends Event> all=result.allInstances();
-        System.out.println(all.size()+"leng");
-        if(!all.isEmpty()){
-            Event e=all.iterator().next();
-            jTextField1.setText("create :"+e.getIndex());
-            jTextField2.setText("date:"+e.getDate());
-        }else{
+        Collection<? extends Event> all = result.allInstances();
+        System.out.println(all.size() + "leng");
+        if (!all.isEmpty()) {
+
+            StringBuilder t1 = new StringBuilder();
+            StringBuilder t2 = new StringBuilder();
+
+            Iterator<? extends Event> it = all.iterator();
+            while (it.hasNext()) {
+                Event eve = (Event) it.next();
+                t1.append(eve.getIndex());
+                t2.append(eve.getDate());
+
+                if (it.hasNext()) {
+                    t1.append(",");
+                    t2.append(",");
+                }
+            }
+
+            jTextField1.setText("create :" + t1);
+            jTextField2.setText("date:" + t2);
+        } else {
             jTextField1.setText("[no selected]");
             jTextField2.setText("");
         }
-        
+
     }
 }
