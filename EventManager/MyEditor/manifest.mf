@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.myorg.editor
+OpenIDE-Module-Localizing-Bundle: org/myorg/editor/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
