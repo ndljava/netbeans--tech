@@ -4,9 +4,7 @@
  */
 package org.myorg.action;
 
-import com.frame.ui.ArageFrame;
 import com.frame.ui.Upanel;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.openide.awt.ActionID;
