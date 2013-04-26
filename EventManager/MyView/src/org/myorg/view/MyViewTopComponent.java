@@ -117,6 +117,7 @@ public final class MyViewTopComponent extends TopComponent implements LookupList
     public void resultChanged(LookupEvent le) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Collection<? extends Event> all=result.allInstances();
+        System.out.println(all.size()+"leng");
         if(!all.isEmpty()){
             Event e=all.iterator().next();
             jTextField1.setText("create :"+e.getIndex());

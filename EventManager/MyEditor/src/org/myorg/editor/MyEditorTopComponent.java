@@ -4,12 +4,15 @@
  */
 package org.myorg.editor;
 
+import java.util.Collections;
 import org.myorg.api.Event;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
+import org.openide.util.lookup.AbstractLookup;
+import org.openide.util.lookup.InstanceContent;
 import org.openide.util.lookup.Lookups;
 
 /**
@@ -35,14 +38,12 @@ import org.openide.util.lookup.Lookups;
 })
 public final class MyEditorTopComponent extends TopComponent {
 
+    private final InstanceContent content = new InstanceContent();
+
     public MyEditorTopComponent() {
         initComponents();
-
-        Event e = new Event();
-        associateLookup(Lookups.singleton(e));
-
-        jTextField1.setText(e.getIndex() + "");
-        jTextField2.setText(e.getDate().toString());
+        
+        associateLookup(new AbstractLookup(content));
 
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
@@ -102,8 +103,13 @@ public final class MyEditorTopComponent extends TopComponent {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        new MyEditorTopComponent().open();
+        Event e = new Event();
+        jTextField1.setText(e.getIndex() + "");
+        jTextField2.setText(e.getDate().toString());
 
+        content.set(Collections.singleton(e), null);
+
+        new MyEditorTopComponent().open();
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
