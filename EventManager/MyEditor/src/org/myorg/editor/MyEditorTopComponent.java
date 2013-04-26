@@ -5,7 +5,6 @@
 package org.myorg.editor;
 
 import java.awt.BorderLayout;
-import java.util.Collections;
 import org.myorg.api.Event;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
@@ -17,8 +16,6 @@ import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.AbstractLookup;
-import org.openide.util.lookup.InstanceContent;
 
 /**
  * Top component which displays something.
@@ -54,7 +51,6 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
 
         associateLookup(ExplorerUtils.createLookup(em, getActionMap()));
-
         
         setLayout(new BorderLayout());
         add(new BeanTreeView(), BorderLayout.CENTER);
