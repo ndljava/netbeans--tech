@@ -31,7 +31,7 @@ import org.openide.util.NbBundle.Messages;
     "CTL_MyEditorTopComponent=MyEditor Window",
     "HINT_MyEditorTopComponent=This is a MyEditor window"
 })
-public final class MyEditorTopComponent extends TopComponent{
+public final class MyEditorTopComponent extends TopComponent {
 
     public MyEditorTopComponent() {
         initComponents();
@@ -85,12 +85,12 @@ public final class MyEditorTopComponent extends TopComponent{
                 .addContainerGap(140, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
     @Override
     public void componentOpened() {
         // TODO add custom code on component opening
