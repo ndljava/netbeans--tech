@@ -4,7 +4,11 @@
  */
 package org.myorg.hello;
 
+import javax.swing.JComponent;
 import org.netbeans.api.settings.ConvertAsProperties;
+import org.netbeans.core.spi.multiview.CloseOperationState;
+import org.netbeans.core.spi.multiview.MultiViewElement;
+import org.netbeans.core.spi.multiview.MultiViewElementCallback;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.windows.TopComponent;
@@ -31,7 +35,7 @@ import org.openide.util.NbBundle.Messages;
     "CTL_wccccTopComponent=wcccc Window",
     "HINT_wccccTopComponent=This is a wcccc window"
 })
-public final class wccccTopComponent extends TopComponent {
+public final class wccccTopComponent extends TopComponent{
 
     public wccccTopComponent() {
         initComponents();
@@ -84,4 +88,6 @@ public final class wccccTopComponent extends TopComponent {
         String version = p.getProperty("version");
         // TODO read your settings according to their version
     }
+
+    
 }

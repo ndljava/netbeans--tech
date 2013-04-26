@@ -5,6 +5,8 @@
 package org.myorg.action;
 
 import com.frame.ui.ArageFrame;
+import com.frame.ui.Upanel;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.openide.awt.ActionID;
@@ -12,7 +14,6 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
-import org.openide.windows.WindowManager;
 
 @ActionID(
         category = "Window",
@@ -27,9 +28,14 @@ public final class SomeAction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // TODO implement action body
         System.out.println("ndljava");
-         
-        TopComponent win = WindowManager.getDefault().findTopComponent("wccccTopComponent");
+
+        // TopComponent win = new wccccTopComponent();
+        TopComponent win = new TopComponent();
+
+        win.add(new Upanel());
+        win.setDisplayName("ssss");
         win.open();
-       // win.requestActive();
+        win.requestActive();
+
     }
 }
