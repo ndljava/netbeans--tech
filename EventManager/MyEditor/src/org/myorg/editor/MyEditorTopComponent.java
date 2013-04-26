@@ -42,11 +42,11 @@ public final class MyEditorTopComponent extends TopComponent {
 
     public MyEditorTopComponent() {
         initComponents();
-        
-        associateLookup(new AbstractLookup(content));
-
+ 
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
+        
+        associateLookup(new AbstractLookup(content));
     }
 
     /**
@@ -102,7 +102,6 @@ public final class MyEditorTopComponent extends TopComponent {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         Event e = new Event();
         jTextField1.setText(e.getIndex() + "");
         jTextField2.setText(e.getDate().toString());
