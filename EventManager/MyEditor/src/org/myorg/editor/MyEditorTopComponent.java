@@ -14,6 +14,7 @@ import org.openide.explorer.ExplorerUtils;
 import org.openide.explorer.view.BeanTreeView;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
+import org.openide.nodes.Node;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 
@@ -56,7 +57,8 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
         add(new BeanTreeView(), BorderLayout.CENTER);
         
         mgr.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
-        
+       // mgr.setRootContext(Node.EMPTY);
+       
         Event e = new Event();
         jTextField1.setText(e.getIndex() + "");
         jTextField2.setText(e.getDate().toString());

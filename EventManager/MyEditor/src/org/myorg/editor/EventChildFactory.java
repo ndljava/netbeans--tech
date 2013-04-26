@@ -19,9 +19,13 @@ import org.openide.util.lookup.Lookups;
  */
 public class EventChildFactory extends ChildFactory<Event> {
 
+    public EventChildFactory() {
+        
+    }
+
     @Override
     protected boolean createKeys(List<Event> list) {
- 
+        
         Event[] obj = new Event[5];
 
         for (int i = 0; i < list.size(); i++) {
@@ -35,7 +39,7 @@ public class EventChildFactory extends ChildFactory<Event> {
 
     @Override
     protected Node createNodeForKey(Event key) {
-        Node n = new AbstractNode(Children.create(new EventChildFactory(), true), Lookups.singleton(key));
+        Node n = new AbstractNode(Children.create(new EventChildFactory(), true),Lookups.singleton(key));
 
         n.setDisplayName(key.toString());
 
