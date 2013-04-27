@@ -19,30 +19,23 @@ import org.openide.util.lookup.Lookups;
  */
 public class EventChildFactory extends ChildFactory<Event> {
 
-    public EventChildFactory() {
-        
+    @Override
+    protected Node createNodeForKey(Event key) {
+        Node n = new AbstractNode(Children.create(new EventChildFactory(), true), Lookups.singleton(key));
+        n.setDisplayName(key.toString());
+        return n;
     }
 
     @Override
     protected boolean createKeys(List<Event> list) {
-        
-        Event[] obj = new Event[5];
-
-        for (int i = 0; i < list.size(); i++) {
-            obj[i] = new Event();
+        Event[] o = new Event[5];
+        for (int i = 0; i < o.length; i++) {
+            o[i] = new Event();
         }
 
-        list.addAll(Arrays.asList(obj));
+        list.addAll(Arrays.asList(o));
 
         return true;
-    }
 
-    @Override
-    protected Node createNodeForKey(Event key) {
-        Node n = new AbstractNode(Children.create(new EventChildFactory(), true),Lookups.singleton(key));
-
-        n.setDisplayName(key.toString());
-
-        return n; //To change body of generated methods, choose Tools | Templates.
     }
 }

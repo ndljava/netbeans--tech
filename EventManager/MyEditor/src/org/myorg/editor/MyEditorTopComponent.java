@@ -14,7 +14,6 @@ import org.openide.explorer.ExplorerUtils;
 import org.openide.explorer.view.BeanTreeView;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
-import org.openide.nodes.Node;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 
@@ -39,31 +38,28 @@ import org.openide.util.NbBundle.Messages;
     "CTL_MyEditorTopComponent=MyEditor Window",
     "HINT_MyEditorTopComponent=This is a MyEditor window"
 })
-public final class MyEditorTopComponent extends TopComponent implements ExplorerManager.Provider{
+public final class MyEditorTopComponent extends TopComponent implements ExplorerManager.Provider {
 
-   // private final InstanceContent content = new InstanceContent();
+    // private final InstanceContent content = new InstanceContent();
+    private final ExplorerManager mgr = new ExplorerManager();
 
-    private final ExplorerManager mgr=new ExplorerManager();
-    
     public MyEditorTopComponent() {
         initComponents();
+        Event e = new Event();
 
         setName(Bundle.CTL_MyEditorTopComponent());
         setToolTipText(Bundle.HINT_MyEditorTopComponent());
 
         associateLookup(ExplorerUtils.createLookup(mgr, getActionMap()));
-        
+
         setLayout(new BorderLayout());
         add(new BeanTreeView(), BorderLayout.CENTER);
-        
-        mgr.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
-       // mgr.setRootContext(Node.EMPTY);
-       
-        Event e = new Event();
-        jTextField1.setText(e.getIndex() + "");
-        jTextField2.setText(e.getDate().toString());
 
-       // content.set(Collections.singleton(e), null);
+        //mgr.setRootContext(new AbstractNode(Children.create(null, true)));
+        mgr.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
+        // mgr.setRootContext(org.openide.nodes.Node.EMPTY);
+
+        // content.set(Collections.singleton(e), null);
     }
 
     /**
@@ -131,13 +127,18 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new MyEditorTopComponent().open();
+        //new MyEditorTopComponent().open();
+        Event e = new Event();
+        // associateLookup(Lookups.singleton(e));
+        jTextField1.setText(e.getIndex() + "");
+        jTextField2.setText(e.getDate().toString());
+
+        // content.set(Collections.singleton(e), null);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -170,8 +171,8 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
 
     @Override
     public ExplorerManager getExplorerManager() {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
         return mgr;
     }
 }
