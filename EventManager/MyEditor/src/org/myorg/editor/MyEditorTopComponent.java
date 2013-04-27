@@ -31,8 +31,8 @@ import org.openide.util.NbBundle.Messages;
 @ActionID(category = "Window", id = "org.myorg.editor.MyEditorTopComponent")
 @ActionReference(path = "Menu/Window" /*, position = 333 */)
 @TopComponent.OpenActionRegistration(
-        displayName = "#CTL_MyEditorAction",
-        preferredID = "MyEditorTopComponent")
+        displayName = "#CTL_MyEditorAction"
+        /*preferredID = "MyEditorTopComponent"*/)
 @Messages({
     "CTL_MyEditorAction=MyEditor",
     "CTL_MyEditorTopComponent=MyEditor Window",
@@ -55,9 +55,9 @@ public final class MyEditorTopComponent extends TopComponent implements Explorer
         setLayout(new BorderLayout());
         add(new BeanTreeView(), BorderLayout.CENTER);
 
-        //mgr.setRootContext(new AbstractNode(Children.create(null, true)));
+
         mgr.setRootContext(new AbstractNode(Children.create(new EventChildFactory(), true)));
-        // mgr.setRootContext(org.openide.nodes.Node.EMPTY);
+
 
         // content.set(Collections.singleton(e), null);
     }
