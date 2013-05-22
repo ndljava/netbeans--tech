@@ -7,21 +7,20 @@
 
 #include <cstdlib>
 #include <iostream>
-
+#include <winsock.h>
 using namespace std;
 
 /*
  * 
  */
 int main(int argc, char** argv) {
-    std::cout << "ndljava";
+    std::cout << "ndljava" << endl;
 
-    string b;
-    while (true) {
-        std::cin >> b;
-        std::cout << b;
-    }
+    string b = "ndljasss";
 
+    std::cout << b;
+    
+    
     return 0;
 }
 
