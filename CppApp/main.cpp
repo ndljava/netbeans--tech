@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, char** argv) {
     std::cout << "ndljava" << endl;
 
-    string b = "ndljasss";
+    string b = "fgthdrthdrtdrt";
 
     std::cout << b;
     
