@@ -15,7 +15,7 @@ import javax.swing.JFileChooser;
 public class BuildJfr extends javax.swing.JFrame {
 
     private JFileChooser fileselectPanel;
-    private BuildXmlToAa bxa;
+    private BuildXmlToAs bxa;
     private int isTmp = 0;
 
     /**
@@ -28,7 +28,7 @@ public class BuildJfr extends javax.swing.JFrame {
     }
 
     private void init() {
-        bxa = new BuildXmlToAa();
+        bxa = new BuildXmlToAs();
         bxa.setTextArea(textContent);
 
     }

@@ -26,7 +26,7 @@ import org.dom4j.io.XMLWriter;
  *
  * @author Administrator
  */
-public class BuildXmlToAa {
+public class BuildXmlToAs {
 
     private String pathStr;
     private String tmpStr;
@@ -35,7 +35,7 @@ public class BuildXmlToAa {
     private String outputDir;
     private JTextArea textArea;
 
-    public BuildXmlToAa() {
+    public BuildXmlToAs() {
     }
 
     public void buildFiles() {
@@ -82,9 +82,9 @@ public class BuildXmlToAa {
 
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(BuildXmlToAa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(BuildXmlToAa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -122,7 +122,7 @@ public class BuildXmlToAa {
             content = content.replace("#fieldvalue#", fieldContent.toString()).replace("#fieldname#", fieldName.toString());
 
         } catch (DocumentException ex) {
-            Logger.getLogger(BuildXmlToAa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -151,7 +151,7 @@ public class BuildXmlToAa {
             textArea.append(outpath + "\n");
 
         } catch (IOException ex) {
-            Logger.getLogger(BuildXmlToAa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -163,7 +163,7 @@ public class BuildXmlToAa {
 
 
         } catch (IOException ex) {
-            Logger.getLogger(BuildXmlToAa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
