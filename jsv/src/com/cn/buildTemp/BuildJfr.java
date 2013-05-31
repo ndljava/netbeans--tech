@@ -4,8 +4,10 @@
  */
 package com.cn.buildTemp;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
@@ -169,6 +171,8 @@ public class BuildJfr extends javax.swing.JFrame {
     private void selectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
         // TODO add your handling code here:
         fileselectPanel.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fileselectPanel.setForeground(Color.red);
+        fileselectPanel.setSelectedFile(new File("E:\\svn\\策划目录\\游戏策划案\\B数据表"));
         fileselectPanel.showOpenDialog(this);
         isTmp = 0;
     }//GEN-LAST:event_selectBtnActionPerformed
