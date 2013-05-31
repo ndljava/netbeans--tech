@@ -62,6 +62,9 @@ public class Uobj {
 //            System.out.println(o.toString());
 //        }
 
-
+        System.out.println("===================");
+        System.out.println(ClassLoader.getSystemClassLoader().getResource("//").getFile());
+        System.out.println(Uobj.class.getCanonicalName()+"=="+Uobj.class.getName()+"--"+Uobj.class.toString());
+        System.out.println(ClassLoader.getSystemClassLoader().getResource("/com/cn/buildTemp/").getFile()+"/template.as");
     }
 }

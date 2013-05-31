@@ -75,15 +75,11 @@ public class BuildXmlToAs {
         try {
 
             content = "";
-
             BufferedReader br = new BufferedReader(new FileReader(f));
-
             while (br.ready()) {
                 content += br.readLine() + "\n";
             }
-
             br.close();
-
 
             fn = fn.replace(".xml", "");
             filename = "T" + fn.substring(0, 1).toUpperCase() + fn.substring(1);
