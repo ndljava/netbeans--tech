@@ -45,9 +45,16 @@ public class BuildJfr extends javax.swing.JFrame {
                 } else if (isTmp == 1) {
                     tempTxt.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
                     bxa.setTmpStr(fileselectPanel.getSelectedFile().getPath());
+
+                    outputDIR.setText(fileselectPanel.getSelectedFile().getParent() + "\\tempfile");
+                    bxa.setOutputDir(fileselectPanel.getSelectedFile().getParent() + "\\tempfile");
                 } else {
                     pathTxt.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
                     bxa.setPathStr(fileselectPanel.getSelectedFile().getPath());
+
+                    bxa.setTmpStr(tempTxt.getText());
+                    bxa.setOutputDir("d:\\tempfiles\\");
+
                 }
             }
         });
@@ -83,6 +90,8 @@ public class BuildJfr extends javax.swing.JFrame {
             }
         });
 
+        pathTxt.setEditable(false);
+
         startBuild.setText("start");
         startBuild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,12 +103,17 @@ public class BuildJfr extends javax.swing.JFrame {
         textContent.setRows(5);
         jScrollPane1.setViewportView(textContent);
 
+        tempTxt.setEditable(false);
+        tempTxt.setText("/template.as");
+
         selectTmp.setText("选择模版文件");
         selectTmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectTmpActionPerformed(evt);
             }
         });
+
+        outputDIR.setEditable(false);
 
         outputBtn.setText("选择输出目录");
         outputBtn.addActionListener(new java.awt.event.ActionListener() {

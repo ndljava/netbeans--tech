@@ -81,6 +81,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="pathTxt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="startBuild">
       <Properties>
@@ -106,6 +109,10 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="tempTxt">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="/template.as"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="selectTmp">
       <Properties>
@@ -116,6 +123,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="outputDIR">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="outputBtn">
       <Properties>

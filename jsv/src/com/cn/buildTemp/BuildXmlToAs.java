@@ -23,6 +23,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 /**
+ * fgnhc二个set高度认同和打算让他获得认同
  *
  * @author Administrator
  */
@@ -58,9 +59,16 @@ public class BuildXmlToAs {
     }
 
     private void readTmpFile(String fn) {
-        File f = new File(tmpStr);
+
+        File f;
+        if (tmpStr.startsWith("/")) {
+            f = new File(ClassLoader.getSystemClassLoader().getResource("//").getFile() + "com/cn/buildTemp/" + tmpStr);
+        } else {
+            f = new File(tmpStr);
+        }
+
         if (!f.exists() || !f.getName().endsWith(".as")) {
-            System.out.println("temp file not exists");
+            System.out.println("temp file not exists" + f.getAbsolutePath());
             return;
         }
 
@@ -111,9 +119,9 @@ public class BuildXmlToAs {
                 Attribute a = itN.next();
 //                    System.out.println(a.getName() + "|" + a.getText() + "|" + a.getValue());
                 if (a.getValue().matches("^[0-9]+$")) {
-                    fieldName.append("\t\tprivate var " + a.getName() + ":int;\n");
+                    fieldName.append("\t\tpublic var " + a.getName() + ":int;\n");
                 } else {
-                    fieldName.append("\t\tprivate var " + a.getName() + ":String;\n");
+                    fieldName.append("\t\tpublic var " + a.getName() + ":String;\n");
                 }
 
                 fieldContent.append("\t\t\tthis." + a.getName() + "=data.@" + a.getName() + ";\n");
@@ -134,14 +142,19 @@ public class BuildXmlToAs {
             return;
         }
 
-        String outpath;
+        String outpath = fpath;
+
         if (outputDir != null) {
             outpath = outputDir + "\\" + filename + ".as";
-        } else {
-            outpath = fpath + "\\" + filename + ".as";
         }
 
-        System.out.println(fpath);
+        File f = new File(outputDir);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+
+        System.out.println(outpath);
+
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(outpath));
             bw.write(content);
