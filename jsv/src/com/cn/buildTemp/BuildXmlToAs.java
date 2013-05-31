@@ -73,6 +73,9 @@ public class BuildXmlToAs {
         }
 
         try {
+            
+            content="";
+            
             BufferedReader br = new BufferedReader(new FileReader(f));
 
             while (br.ready()) {
@@ -156,7 +159,7 @@ public class BuildXmlToAs {
         System.out.println(outpath);
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(outpath));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outpath,false));
             bw.write(content);
             bw.flush();
             bw.close();
