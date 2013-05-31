@@ -23,7 +23,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 /**
- * fgnhc二个set高度认同和打算让他获得认同
+ * xdgnhdc最多时发现根本房产过户费等与人谈话
  *
  * @author Administrator
  */
@@ -125,7 +125,8 @@ public class BuildXmlToAs {
 
                 fieldContent.append("\t\t\tthis." + a.getName() + "=data.@" + a.getName() + ";\n");
             }
-
+            
+            //注册机制
             content = content.replace("#fieldvalue#", fieldContent.toString()).replace("#fieldname#", fieldName.toString());
 
         } catch (DocumentException ex) {
@@ -155,6 +156,7 @@ public class BuildXmlToAs {
         System.out.println(outpath);
 
         try {
+            
             BufferedWriter bw = new BufferedWriter(new FileWriter(outpath, false));
             bw.write(content);
             bw.flush();
@@ -172,8 +174,6 @@ public class BuildXmlToAs {
             XMLWriter xw = new XMLWriter(new FileWriter(fi));
             xw.write(fi);
             xw.close();
-
-
         } catch (IOException ex) {
             Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         }
