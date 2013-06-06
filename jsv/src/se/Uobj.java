@@ -27,11 +27,8 @@ public class Uobj {
         // p.setDx(3);
         System.out.println(p2);
         System.out.println(p);
-        
-        
+
         System.out.println("ndljava");
-        
-        
 
 //        Vector<Point> vu = new Vector<Point>();
 //
@@ -64,7 +61,25 @@ public class Uobj {
 
         System.out.println("===================");
         System.out.println(ClassLoader.getSystemClassLoader().getResource("//").getFile());
-        System.out.println(Uobj.class.getCanonicalName()+"=="+Uobj.class.getName()+"--"+Uobj.class.toString());
-        System.out.println(ClassLoader.getSystemClassLoader().getResource("/com/cn/buildTemp/").getFile()+"/template.as");
+        System.out.println(Uobj.class.getCanonicalName() + "==" + Uobj.class.getName() + "--" + Uobj.class.toString());
+        // System.out.println(ClassLoader.getSystemClassLoader().getResource("/com/cn/buildTemp/").getFile()+"/template.as");
+
+        System.out.println(-10 * 20 * 34+"=====================================");
+
+        int cd = 2;
+        switch (cd) {
+            case 1:
+                System.out.println(cd);
+                break;
+            case 2:
+                System.out.println(cd);
+                break;
+            case 3:
+                System.out.println(cd);
+                break;
+            default:
+                throw new AssertionError();
+        }
+
     }
 }
