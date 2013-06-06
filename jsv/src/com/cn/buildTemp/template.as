@@ -6,7 +6,7 @@ package com.ace.gameData.bag
 		
 #fieldname#
 		
-		public function #classname#(data:XML)
+		public function #classname#(data:XML=null)
 		{
 			if(data==null) return ;
 			
