@@ -47,19 +47,23 @@ public class BuildJfr extends javax.swing.JFrame {
                 if (isTmp == 2) {
                     
                     outputDIR.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
+                    
                     bxa.setOutputDir(fileselectPanel.getSelectedFile().getPath());
                     
                 } else if (isTmp == 1) {
                     
                     tempTxt.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
+                    
                     bxa.setTmpStr(fileselectPanel.getSelectedFile().getPath());
 
                     outputDIR.setText(fileselectPanel.getSelectedFile().getParent() + "\\tempfile");
+                    
                     bxa.setOutputDir(fileselectPanel.getSelectedFile().getParent() + "\\tempfile");
                     
                 } else {
                     
                     pathTxt.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
+                    
                     bxa.setPathStr(fileselectPanel.getSelectedFile().getPath());
 
                     bxa.setTmpStr(tempTxt.getText());
