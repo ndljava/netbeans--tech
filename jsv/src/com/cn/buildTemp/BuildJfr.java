@@ -32,32 +32,39 @@ public class BuildJfr extends javax.swing.JFrame {
     private void init() {
         bxa = new BuildXmlToAs();
         bxa.setTextArea(textContent);
-
     }
 
     private void initUI() {
         fileselectPanel = new JFileChooser();
         fileselectPanel.addActionListener(new ActionListener() {
+            
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 System.out.println(fileselectPanel.getSelectedFile().getPath());
+                
                 if (isTmp == 2) {
+                    
                     outputDIR.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
                     bxa.setOutputDir(fileselectPanel.getSelectedFile().getPath());
+                    
                 } else if (isTmp == 1) {
+                    
                     tempTxt.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
                     bxa.setTmpStr(fileselectPanel.getSelectedFile().getPath());
 
                     outputDIR.setText(fileselectPanel.getSelectedFile().getParent() + "\\tempfile");
                     bxa.setOutputDir(fileselectPanel.getSelectedFile().getParent() + "\\tempfile");
+                    
                 } else {
+                    
                     pathTxt.setText(fileselectPanel.getSelectedFile().getAbsolutePath());
                     bxa.setPathStr(fileselectPanel.getSelectedFile().getPath());
 
                     bxa.setTmpStr(tempTxt.getText());
                     bxa.setOutputDir("d:\\tempfiles\\");
-
                 }
+                
             }
         });
 
@@ -170,11 +177,12 @@ public class BuildJfr extends javax.swing.JFrame {
 
     private void selectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
         // TODO add your handling code here:
+        isTmp = 0;
         fileselectPanel.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fileselectPanel.setForeground(Color.red);
         fileselectPanel.setSelectedFile(new File("E:\\svn\\策划目录\\游戏策划案\\B数据表\\道具表"));
         fileselectPanel.showOpenDialog(this);
-        isTmp = 0;
+        
     }//GEN-LAST:event_selectBtnActionPerformed
 
     private void startBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBuildActionPerformed
