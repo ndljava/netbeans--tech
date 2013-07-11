@@ -17,10 +17,10 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class Ncll {
-    
+
     public Ncll() {
     }
-    
+
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -29,26 +29,26 @@ public class Ncll {
         }
         //?characterEncoding=GBK
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "root");
-            
-            
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
             Statement stat = con.createStatement();
-            
-            ResultSet rs = stat.executeQuery("select * from DB");
+
+            ResultSet rs = stat.executeQuery("select * from todo");
             while (rs.next()) {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
+                System.out.print(rs.getString(1)+"|");
+                System.out.print(rs.getString(2)+"|");
+                System.out.print(rs.getString(3)+"|");
+                System.out.println(rs.getString(4)+"|");
             }
-            
+
             rs.close();
             con.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Ncll.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
+
+
+
+
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update xmlns="http://ns.adobe.com/air/framework/update/description/2.5">
+    <versionNumber>0.0.2</versionNumber>
+    <url>http://localhost:81/leonardofranca/air/updates/testeUpdate/testeUpdate_0.0.2.air</url>
+    <description>
+<![CDATA[
+This version has fixes for the following knowns issues:
+First issue
+Second issue
+ ]]>
+    </description>
+</update>

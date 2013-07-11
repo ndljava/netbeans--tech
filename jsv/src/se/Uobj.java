@@ -81,5 +81,12 @@ public class Uobj {
                 throw new AssertionError();
         }
 
+        System.out.println(1%3);
+        System.out.println(-1%3);
+        System.out.println(6%5);
+        System.out.println(-6%5);
+        
+        System.out.println(1%-3);
+        System.out.println(6%-5);
     }
 }

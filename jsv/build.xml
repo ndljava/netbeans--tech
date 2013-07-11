@@ -1,13 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
-<!-- By default, only the Clean and Build commands use this build script. -->
-<!-- Commands such as Run, Debug, and Test only use this build script if -->
-<!-- the Compile on Save feature is turned off for the project. -->
-<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
-<!-- in the project's Project Properties dialog box.-->
-<project name="jsv" default="default" basedir=".">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- You may freely edit this file. See commented blocks below for --><!-- some examples of how to customize the build. --><!-- (If you delete it and reopen the project it will be recreated.) --><!-- By default, only the Clean and Build commands use this build script. --><!-- Commands such as Run, Debug, and Test only use this build script if --><!-- the Compile on Save feature is turned off for the project. --><!-- You can turn off the Compile on Save (or Deploy on Save) setting --><!-- in the project's Project Properties dialog box.--><project basedir="." default="default" name="jsv">
     <description>Builds, tests, and runs the project jsv.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
@@ -71,4 +63,21 @@
     nbproject/build-impl.xml file. 
 
     -->
+<!--Target required for SAAS(REST) services: XJCTask initialization-->
+<target depends="-init-project" name="saas-init-xjc">
+<taskdef classname="com.sun.tools.xjc.XJCTask" name="xjc">
+<classpath path="${libs.jaxb.classpath}"/>
+</taskdef>
+</target>
+
+<!--Target required for SAAS(REST) services: data types generation-->
+<target depends="saas-init-xjc" name="saas.xjc.flickr.photoservice">
+<xjc destdir="src" encoding="${source.encoding}" package="flickr.photoservice.flickrresponse" schema="src/META-INF/FlickrResponse.xsd" target="2.1"/>
+</target>
+
+<!--Target required for SAAS(REST) services: data types generation-->
+<target depends="saas-init-xjc" name="saas.xjc.zvents.eventsearchservice">
+<xjc destdir="src" encoding="${source.encoding}" package="zvents.eventsearchservice.zventsresponse" schema="src/META-INF/ZventsResponse.xsd" target="2.1"/>
+</target>
+
 </project>
