@@ -32,6 +32,7 @@ public class BuildJfr extends javax.swing.JFrame {
     private void init() {
         bxa = new BuildXmlToAs();
         bxa.setTextArea(textContent);
+        bxa.setOutputDir("d:\\tempfiles\\");
     }
 
     private void initUI() {
@@ -62,7 +63,7 @@ public class BuildJfr extends javax.swing.JFrame {
                     bxa.setPathStr(fileselectPanel.getSelectedFile().getPath());
 
                     bxa.setTmpStr(tempTxt.getText());
-                    bxa.setOutputDir("d:\\tempfiles\\");
+                    
                 }
                 
             }
