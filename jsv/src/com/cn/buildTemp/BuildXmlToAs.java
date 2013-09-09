@@ -29,11 +29,28 @@ import org.dom4j.io.XMLWriter;
  */
 public class BuildXmlToAs {
 
+    /**
+     * 原始文件
+     */
     private String pathStr;
+    
+    /**
+     * 模版文件
+     */
     private String tmpStr;
+    /**
+     * 内容
+     */
     private String content = "";
     private String filename;
+    
+    /**
+     * 输出目录
+     */
     private String outputDir;
+
+    private String elementName;
+    
     private JTextArea textArea;
 
     public BuildXmlToAs() {
@@ -106,7 +123,7 @@ public class BuildXmlToAs {
 
             Iterator<Attribute> itN;
 
-            Element e = ele.element("item");
+            Element e = ele.elements().get(0);
 
             //System.out.println(e.getName() + "|" + e.attributeValue("id")); //+"|"+e.asXML());
 
@@ -206,4 +223,15 @@ public class BuildXmlToAs {
     public void setOutputDir(String outputDir) {
         this.outputDir = outputDir;
     }
+
+    public String getElementName() {
+        return elementName;
+    }
+
+    public void setElementName(String elementName) {
+        this.elementName = elementName;
+    }
+    
+    
+    
 }
