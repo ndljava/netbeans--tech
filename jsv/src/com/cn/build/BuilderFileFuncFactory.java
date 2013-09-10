@@ -87,6 +87,12 @@ public class BuilderFileFuncFactory {
         return null;
     }
 
+    /*
+     * 
+     * 通过excel生成所需的数据
+     * 
+     * key 为文件名 
+     */
     public static Map<String, BuildReadFileVo> readExcelFile(File f) {
         System.out.println("解析excel" + f.getAbsolutePath());
 
@@ -156,12 +162,12 @@ public class BuilderFileFuncFactory {
                                     commentStr = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString().split("\n");
 
                                     for (int c = 0; c < commentStr.length; c++) {
-                                        fieldName.append("\t\t*\t"+commentStr[c]+"\n");
+                                        fieldName.append("\t\t*\t" + commentStr[c] + "\n");
                                     }
-                                    
+
                                     fieldName.append("\t\t*/\n");
-                                    
-                                    
+
+
                                     fieldName.append("\t\tprivate var " + cellStr + ":String;\n\n");
 
                                     fieldContent.append("\t\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");
