@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cn.buildTemp;
+package com.cn.build;
 
+import com.cn.build.BuilderFileFuncFactory;
+import com.cn.buildTemp.BuildXmlToAs;
 import com.cn.ndl.enums.BuilderFileEnum;
 import com.cn.vo.BuildReadFileVo;
 import java.io.BufferedReader;

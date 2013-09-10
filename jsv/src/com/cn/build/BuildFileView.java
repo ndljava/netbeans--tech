@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cn.buildTemp;
+package com.cn.build;
 
 import com.cn.ndl.enums.BuilderFileEnum;
 import java.awt.Color;
@@ -15,7 +15,7 @@ import javax.swing.JFileChooser;
  *
  * @author Administrator
  */
-public class BuildJfr extends javax.swing.JFrame {
+public class BuildFileView extends javax.swing.JFrame {
 
     private JFileChooser fileselectPanel;
     private BuilderImp bxa;
@@ -27,7 +27,7 @@ public class BuildJfr extends javax.swing.JFrame {
     /**
      * Creates new form BuildJfr
      */
-    public BuildJfr() {
+    public BuildFileView() {
         initComponents();
         init();
         initUI();
@@ -288,20 +288,20 @@ public class BuildJfr extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuildJfr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuildFileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuildJfr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuildFileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuildJfr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuildFileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuildJfr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuildFileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuildJfr().setVisible(true);
+                new BuildFileView().setVisible(true);
             }
         });
     }

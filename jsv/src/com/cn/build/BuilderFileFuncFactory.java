@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cn.buildTemp;
+package com.cn.build;
 
+import com.cn.buildTemp.BuildXmlToAs;
 import com.cn.vo.BuildReadFileVo;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +39,7 @@ public class BuilderFileFuncFactory {
     /**
      * 读取xml 并生成相关数据
      *
-     * 0,是字段名字 1,是字段值
+     * key,是字段名字 value,是字段对象
      *
      */
     public static Map<String, BuildReadFileVo> readXmlFile(File f) {
@@ -155,13 +156,13 @@ public class BuilderFileFuncFactory {
                                     commentStr = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString().split("\n");
 
                                     for (int c = 0; c < commentStr.length; c++) {
-                                        fieldName.append("\t\t*"+commentStr[i]+"\n");
+                                        fieldName.append("\t\t*\t"+commentStr[c]+"\n");
                                     }
                                     
                                     fieldName.append("\t\t*/\n");
                                     
                                     
-                                    fieldName.append("\t\tprivate var " + cellStr + ":String;\n");
+                                    fieldName.append("\t\tprivate var " + cellStr + ":String;\n\n");
 
                                     fieldContent.append("\t\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");
 
