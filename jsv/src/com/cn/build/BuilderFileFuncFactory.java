@@ -122,8 +122,8 @@ public class BuilderFileFuncFactory {
                 sheet = wb.getSheetAt(i);
 
                 if (sheet.getSheetName().indexOf("Sheet")>-1 || sheet.getSheetName().indexOf("说明") > -1) {
-                    System.out.println(sheet.getSheetName()+"没有读取!!!");
-                    break;
+                    System.out.println(sheet.getSheetName()+" 没有读取!!!");
+                    continue;
                 }
 
                 fieldContent.setLength(0);
