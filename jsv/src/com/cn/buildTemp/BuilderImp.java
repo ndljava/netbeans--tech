@@ -88,12 +88,14 @@ public class BuilderImp {
 
     }
 
-    private void replaceTmp(String fn) {
+    private void replaceTmp(String fn,BuildReadFileVo vo) {
 
         content = tmpContent;
-        fn = fn.replace(".xml", "");
+
         filename = "T" + fn.substring(0, 1).toUpperCase() + fn.substring(1);
         content = content.replaceAll("#classname#", filename);
+
+        content = content.replace("#fieldvalue#", vo.getFieldContent().toString()).replace("#fieldname#", vo.getFieldName().toString());
     }
 
     /*
@@ -149,9 +151,7 @@ public class BuilderImp {
         for (int i = 0; i < f.listFiles().length; i++) {
             fi = f.listFiles()[i];
             if (fi.exists()) {
-                replaceTmp(fi.getName());
                 buildModel(fi, fileType);
-                // writeFile(fi.getParent());
             }
         }
     }
@@ -184,21 +184,18 @@ public class BuilderImp {
         }
 
         String key;
-
         Iterator<String> keys = rs.keySet().iterator();
+
         while (keys.hasNext()) {
-            key=keys.next();
+            key = keys.next();
             System.out.println(key);
-            System.out.println(rs.get(key).getFieldName());
+            //System.out.println(rs.get(key).getFieldName());
+
+            replaceTmp(key,rs.get(key));
+
+
+            writeFile(key);
         }
-
-
-//        if(str.size()>2){
-//            
-//        }else{
-//            
-//             content = content.replace("#fieldvalue#", str[1]).replace("#fieldname#", str[0]);
-//        }
 
 
     }

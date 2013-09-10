@@ -32,7 +32,7 @@ import org.dom4j.io.SAXReader;
  * @author Administrator
  */
 public class BuilderFileFuncFactory {
-    
+
     private static BuilderFileFuncFactory instance;
 
     /**
@@ -51,14 +51,14 @@ public class BuilderFileFuncFactory {
             // System.out.println(ele.getName() + "===" + ele.getPath());
 
             Iterator<Attribute> itN;
-            
+
             Element e = ele.elements().get(0);
 
             //System.out.println(e.getName() + "|" + e.attributeValue("id")); //+"|"+e.asXML());
 
             StringBuilder fieldName = new StringBuilder();
             StringBuilder fieldContent = new StringBuilder();
-            
+
             itN = e.attributeIterator();
             while (itN.hasNext()) {
                 Attribute a = itN.next();
@@ -68,110 +68,117 @@ public class BuilderFileFuncFactory {
                 } else {
                     fieldName.append("\t\tpublic var " + a.getName() + ":String;\n");
                 }
-                
+
                 fieldContent.append("\t\t\tthis." + a.getName() + "=data.@" + a.getName() + ";\n");
             }
-            
+
             Map<String, BuildReadFileVo> vec = new HashMap<String, BuildReadFileVo>();
-            
+
             vec.put(f.getName().replace(".xml", ""), new BuildReadFileVo(fieldName, fieldContent));
-            
-            
+
+
             return vec;
-            
+
         } catch (DocumentException ex) {
             Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
-    
+
     public static Map<String, BuildReadFileVo> readExcelFile(File f) {
         System.out.println("解析excel" + f.getAbsolutePath());
-        
+
         try {
             Workbook wb = WorkbookFactory.create(new FileInputStream(f));
-            
+
             int sheetCount = wb.getNumberOfSheets();
-            
+
             System.out.println("读取excel文件" + f.getName());
             System.out.println("总共" + sheetCount + "个sheet");
-            
-            
+
+
             Sheet sheet;
             Row row;
             Cell cell;
-            
+
             boolean isCommentRow = false;
             boolean isFieldRow = false;
-            
+
             StringBuilder fieldName = new StringBuilder();
             StringBuilder fieldContent = new StringBuilder();
             Map<String, BuildReadFileVo> vec = new HashMap<String, BuildReadFileVo>();
-            
+
             String cellStr;
-            
+            String[] commentStr;
+
             for (int i = 0; i < sheetCount; i++) {
-                
+
                 sheet = wb.getSheetAt(i);
-                
+
                 fieldContent.setLength(0);
                 fieldName.setLength(0);
-                
+
                 for (Iterator<Row> irow = sheet.rowIterator(); irow.hasNext();) {
-                    
+
                     row = irow.next();
-                    
-                    
+
+
                     for (Iterator<Cell> icell = row.cellIterator(); icell.hasNext();) {
-                        
+
                         cell = icell.next();
-                        
+
                         switch (cell.getCellType()) {
                             case Cell.CELL_TYPE_BLANK:
-                                
+
                                 break;
                             case Cell.CELL_TYPE_BOOLEAN:
-                                
+
                                 break;
                             case Cell.CELL_TYPE_ERROR:
-                                
+
                                 break;
                             case Cell.CELL_TYPE_FORMULA:
-                                
+
                                 break;
                             case Cell.CELL_TYPE_NUMERIC:
-                                
+
                                 break;
                             case Cell.CELL_TYPE_STRING:
-                                
+
                                 cellStr = cell.getRichStringCellValue().getString();
-                                
+
                                 if (isCommentRow && isFieldRow) {
-                                    
+
                                     fieldName.append("\t\t/**\n");
-                                    fieldName.append("\t\t*" + sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString() + "\n");
+
+                                    commentStr = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString().split("\n");
+
+                                    for (int c = 0; c < commentStr.length; c++) {
+                                        fieldName.append("\t\t*"+commentStr[i]+"\n");
+                                    }
+                                    
                                     fieldName.append("\t\t*/\n");
                                     
-                                    fieldName.append("\t\tprivate var " + cellStr + ":String;\n");
                                     
-                                    fieldContent.append("\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");
+                                    fieldName.append("\t\tprivate var " + cellStr + ":String;\n");
 
-                                    // System.out.println(cellStr);
+                                    fieldContent.append("\t\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");
+
                                 }
-                                
-                                
+
+
                                 if ((cellStr.trim().startsWith("Index") || cellStr.trim().startsWith("Id")) && !isCommentRow) {
                                     isCommentRow = true;
                                 }
-                                
+
                                 break;
                         }
                     }
-                    
+
                     if (isCommentRow && isFieldRow) {
                         vec.put(sheet.getSheetName(), new BuildReadFileVo(fieldName, fieldContent));
-                        
+
                         isCommentRow = isFieldRow = false;
                         break;
                     }
@@ -182,24 +189,24 @@ public class BuilderFileFuncFactory {
                     if (isCommentRow) {
                         isFieldRow = true;
                     }
-                    
+
                 }
 
                 //一个sheet就是一个文件
-                
+
             }
-            
+
             return vec;
-            
+
         } catch (IOException | InvalidFormatException ex) {
             Logger.getLogger(BuilderFileFuncFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         return null;
     }
 }
