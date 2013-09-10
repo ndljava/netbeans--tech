@@ -31,6 +31,11 @@ public class kbs {
         
        // System.out.println(f.);
         
+        String[] s=new String[20];
+        
+        s[3]="fff";
+        
+        System.out.println(s[0]);
         
 
     }

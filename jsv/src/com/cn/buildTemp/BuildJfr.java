@@ -4,6 +4,7 @@
  */
 package com.cn.buildTemp;
 
+import com.cn.ndl.enums.BuilderFileEnum;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +18,12 @@ import javax.swing.JFileChooser;
 public class BuildJfr extends javax.swing.JFrame {
 
     private JFileChooser fileselectPanel;
-    private BuildXmlToAs bxa;
+    private BuilderImp bxa;
+     
     private int isTmp = 0;
 
+    private String outPath="d:\\tempfiles\\";
+    
     /**
      * Creates new form BuildJfr
      */
@@ -30,9 +34,10 @@ public class BuildJfr extends javax.swing.JFrame {
     }
 
     private void init() {
-        bxa = new BuildXmlToAs();
+        bxa = new BuilderImp();
         bxa.setTextArea(textContent);
-        bxa.setOutputDir("d:\\tempfiles\\");
+        bxa.setOutputDir(this.outPath);
+        
     }
 
     private void initUI() {
@@ -93,6 +98,7 @@ public class BuildJfr extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        ExcelBuild = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("xml生成as文件");
@@ -106,7 +112,7 @@ public class BuildJfr extends javax.swing.JFrame {
 
         pathTxt.setEditable(false);
 
-        startBuild.setText("开始生成");
+        startBuild.setText("通过xml生成");
         startBuild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startBuildActionPerformed(evt);
@@ -152,6 +158,13 @@ public class BuildJfr extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("开始读取节点:");
 
+        ExcelBuild.setText("通过Excel生成");
+        ExcelBuild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcelBuildActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,7 +172,7 @@ public class BuildJfr extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -180,7 +193,8 @@ public class BuildJfr extends javax.swing.JFrame {
                     .addComponent(selectBtn)
                     .addComponent(selectTmp)
                     .addComponent(startBuild)
-                    .addComponent(outputBtn))
+                    .addComponent(outputBtn)
+                    .addComponent(ExcelBuild))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -209,7 +223,10 @@ public class BuildJfr extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(startBuild))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(startBuild)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ExcelBuild)))
                 .addGap(24, 24, 24))
         );
 
@@ -229,7 +246,7 @@ public class BuildJfr extends javax.swing.JFrame {
     private void startBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBuildActionPerformed
         bxa.setElementName(elementTxt.getText());
         this.setEnabled(false);
-        bxa.buildFiles();
+        bxa.buildFiles(BuilderFileEnum.BUILD_FILE_TYPE_XML);
         this.setEnabled(true);
     }//GEN-LAST:event_startBuildActionPerformed
 
@@ -246,6 +263,13 @@ public class BuildJfr extends javax.swing.JFrame {
         fileselectPanel.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileselectPanel.showOpenDialog(this);
     }//GEN-LAST:event_outputBtnActionPerformed
+
+    private void ExcelBuildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcelBuildActionPerformed
+        // TODO add your handling code here:
+         
+        bxa.buildFiles(BuilderFileEnum.BUILD_FILE_TYPE_EXCEL);
+        
+    }//GEN-LAST:event_ExcelBuildActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,6 +306,7 @@ public class BuildJfr extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExcelBuild;
     private javax.swing.JTextField elementTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
