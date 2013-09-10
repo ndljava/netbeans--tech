@@ -4,7 +4,6 @@
  */
 package com.cn.build;
 
-import com.cn.build.BuilderFileFuncFactory;
 import com.cn.buildTemp.BuildXmlToAs;
 import com.cn.ndl.enums.BuilderFileEnum;
 import com.cn.vo.BuildReadFileVo;
@@ -15,11 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
