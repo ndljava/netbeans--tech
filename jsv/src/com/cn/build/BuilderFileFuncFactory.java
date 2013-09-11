@@ -160,20 +160,22 @@ public class BuilderFileFuncFactory {
 
                                 if (isCommentRow && isFieldRow) {
 
-                                    fieldName.append("\t\t/**\n");
+                                    if (sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue() != null) {
 
-                                    String preCell = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString();
-                                    if (preCell.indexOf("\n") > -1) {
-                                        commentStr = preCell.split("\n");
-                                        for (int c = 0; c < commentStr.length; c++) {
-                                            fieldName.append("\t\t*\t" + commentStr[c] + "\n");
+                                        fieldName.append("\t\t/**\n");
+                                        String preCell = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString();
+                                        
+                                        if (preCell.indexOf("\n") > -1) {
+                                            commentStr = preCell.split("\n");
+                                            for (int c = 0; c < commentStr.length; c++) {
+                                                fieldName.append("\t\t*\t" + commentStr[c] + "\n");
+                                            }
+                                        } else {
+                                            fieldName.append("\t\t*\t" + preCell + "\n");
                                         }
-                                    } else {
-                                         fieldName.append("\t\t*\t" + preCell + "\n");
+
+                                        fieldName.append("\t\t*/\n");
                                     }
-
-                                    fieldName.append("\t\t*/\n");
-
 
                                     fieldName.append("\t\tprivate var " + cellStr + ":String;\n\n");
 
@@ -181,8 +183,7 @@ public class BuilderFileFuncFactory {
 
                                 }
 
-
-                                if ((cellStr.trim().toLowerCase().indexOf("index") > -1 || cellStr.trim().toLowerCase().indexOf("id") > -1) && !isCommentRow) {
+                                if ((cellStr.toLowerCase().indexOf("index") > -1 || cellStr.toLowerCase().indexOf("id") > -1) && !isCommentRow) {
                                     isCommentRow = true;
                                 }
 
