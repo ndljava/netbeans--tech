@@ -158,13 +158,17 @@ public class BuilderFileFuncFactory {
 
                                 cellStr = cell.getRichStringCellValue().getString();
 
-                                if (isCommentRow && isFieldRow) {
+                                if (isCommentRow && isFieldRow && cellStr != null && sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()) != null) {
+//                                    System.out.println(cellStr);
+//                                    System.out.println(sheet.getRow(row.getRowNum() - 1));
+//                                    System.out.println(sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()));
+//                                    System.out.println(sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue());
 
+                                    fieldName.append("\t\t/**\n");
                                     if (sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue() != null) {
 
-                                        fieldName.append("\t\t/**\n");
                                         String preCell = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString();
-                                        
+
                                         if (preCell.indexOf("\n") > -1) {
                                             commentStr = preCell.split("\n");
                                             for (int c = 0; c < commentStr.length; c++) {
@@ -174,9 +178,9 @@ public class BuilderFileFuncFactory {
                                             fieldName.append("\t\t*\t" + preCell + "\n");
                                         }
 
-                                        fieldName.append("\t\t*/\n");
                                     }
 
+                                    fieldName.append("\t\t*/\n");
                                     fieldName.append("\t\tprivate var " + cellStr + ":String;\n\n");
 
                                     fieldContent.append("\t\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");

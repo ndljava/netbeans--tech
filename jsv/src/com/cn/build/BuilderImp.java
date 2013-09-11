@@ -131,7 +131,7 @@ public class BuilderImp {
             BufferedWriter bw = new BufferedWriter(new FileWriter(outpath, false));
             bw.write(content);
             bw.flush();
-
+            bw.close();;
             textArea.append(outpath + "\n");
 
         } catch (IOException ex) {
