@@ -110,8 +110,8 @@ public class BuilderFileFuncFactory {
             boolean isCommentRow = false;
             boolean isFieldRow = false;
 
-            StringBuilder fieldName = new StringBuilder();
-            StringBuilder fieldContent = new StringBuilder();
+            StringBuilder fieldName;
+            StringBuilder fieldContent;
             Map<String, BuildReadFileVo> vec = new HashMap<String, BuildReadFileVo>();
 
             String cellStr;
@@ -121,13 +121,13 @@ public class BuilderFileFuncFactory {
 
                 sheet = wb.getSheetAt(i);
 
-                if (sheet.getSheetName().indexOf("Sheet")>-1 || sheet.getSheetName().indexOf("说明") > -1) {
-                    System.out.println(sheet.getSheetName()+" 没有读取!!!");
+                if (sheet.getSheetName().indexOf("Sheet") > -1 || sheet.getSheetName().indexOf("说明") > -1) {
+                    System.out.println(sheet.getSheetName() + " 没有读取!!!");
                     continue;
                 }
 
-                fieldContent.setLength(0);
-                fieldName.setLength(0);
+                fieldName = new StringBuilder();
+                fieldContent = new StringBuilder();
 
                 for (Iterator<Row> irow = sheet.rowIterator(); irow.hasNext();) {
 
@@ -162,10 +162,14 @@ public class BuilderFileFuncFactory {
 
                                     fieldName.append("\t\t/**\n");
 
-                                    commentStr = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString().split("\n");
-
-                                    for (int c = 0; c < commentStr.length; c++) {
-                                        fieldName.append("\t\t*\t" + commentStr[c] + "\n");
+                                    String preCell = sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue().getString();
+                                    if (preCell.indexOf("\n") > -1) {
+                                        commentStr = preCell.split("\n");
+                                        for (int c = 0; c < commentStr.length; c++) {
+                                            fieldName.append("\t\t*\t" + commentStr[c] + "\n");
+                                        }
+                                    } else {
+                                         fieldName.append("\t\t*\t" + preCell + "\n");
                                     }
 
                                     fieldName.append("\t\t*/\n");
@@ -178,7 +182,7 @@ public class BuilderFileFuncFactory {
                                 }
 
 
-                                if ((cellStr.trim().startsWith("Index") || cellStr.trim().startsWith("Id")) && !isCommentRow) {
+                                if ((cellStr.trim().toLowerCase().indexOf("index") > -1 || cellStr.trim().toLowerCase().indexOf("id") > -1) && !isCommentRow) {
                                     isCommentRow = true;
                                 }
 

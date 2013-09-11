@@ -46,6 +46,11 @@ public class BuilderImp {
     private String outputDir;
     private String elementName;
     private JTextArea textArea;
+    public boolean isChildDir = false;
+    /*
+     * 文件类型
+     */
+    private int fileType;
 
     public BuilderImp() {
     }
@@ -86,7 +91,7 @@ public class BuilderImp {
 
     }
 
-    private void replaceTmp(String fn,BuildReadFileVo vo) {
+    private void replaceTmp(String fn, BuildReadFileVo vo) {
 
         content = tmpContent;
 
@@ -142,16 +147,28 @@ public class BuilderImp {
             return;
         }
 
+        this.fileType = fileType;
         //读模版
         readTmpFile();
+        buildFileList(f);
+    }
 
+    private void buildFileList(File f) {
+        System.out.println(f.getAbsolutePath());
         File fi;
         for (int i = 0; i < f.listFiles().length; i++) {
             fi = f.listFiles()[i];
-            if (fi.exists()) {
-                buildModel(fi, fileType);
+            if (fi.exists() && !fi.isHidden()) {
+                if (fi.isFile()) {
+                    buildModel(fi, this.fileType);
+                } else {
+                    if (this.isChildDir) {
+                        buildFileList(fi);
+                    }
+                }
             }
         }
+
     }
 
     private void buildModel(File f, int filetype) {
@@ -189,7 +206,7 @@ public class BuilderImp {
             System.out.println(key);
             //System.out.println(rs.get(key).getFieldName());
 
-            replaceTmp(key,rs.get(key));
+            replaceTmp(key, rs.get(key));
 
 
             writeFile(key);

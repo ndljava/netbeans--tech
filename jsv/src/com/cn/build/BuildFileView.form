@@ -56,6 +56,7 @@
                   <Component id="startBuild" min="-2" max="-2" attributes="0"/>
                   <Component id="outputBtn" min="-2" max="-2" attributes="0"/>
                   <Component id="ExcelBuild" min="-2" max="-2" attributes="0"/>
+                  <Component id="childDir" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -96,6 +97,8 @@
                       <Component id="startBuild" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="ExcelBuild" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="childDir" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -204,6 +207,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExcelBuildActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="childDir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x5305;&#x542b;&#x5b50;&#x76ee;&#x5f55;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="childDirStateChanged"/>
       </Events>
     </Component>
   </SubComponents>

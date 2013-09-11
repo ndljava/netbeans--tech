@@ -99,6 +99,7 @@ public class BuildFileView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         ExcelBuild = new javax.swing.JButton();
+        childDir = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("xml生成as文件");
@@ -165,6 +166,13 @@ public class BuildFileView extends javax.swing.JFrame {
             }
         });
 
+        childDir.setText("包含子目录");
+        childDir.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                childDirStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +202,8 @@ public class BuildFileView extends javax.swing.JFrame {
                     .addComponent(selectTmp)
                     .addComponent(startBuild)
                     .addComponent(outputBtn)
-                    .addComponent(ExcelBuild))
+                    .addComponent(ExcelBuild)
+                    .addComponent(childDir))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -226,7 +235,9 @@ public class BuildFileView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(startBuild)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ExcelBuild)))
+                        .addComponent(ExcelBuild)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(childDir)))
                 .addGap(24, 24, 24))
         );
 
@@ -271,6 +282,11 @@ public class BuildFileView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ExcelBuildActionPerformed
 
+    private void childDirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_childDirStateChanged
+        // TODO add your handling code here:
+        bxa.isChildDir=childDir.isSelected();
+    }//GEN-LAST:event_childDirStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +323,7 @@ public class BuildFileView extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExcelBuild;
+    private javax.swing.JCheckBox childDir;
     private javax.swing.JTextField elementTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
