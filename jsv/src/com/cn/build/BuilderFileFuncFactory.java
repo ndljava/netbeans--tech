@@ -6,6 +6,7 @@ package com.cn.build;
 
 import com.cn.buildTemp.BuildXmlToAs;
 import com.cn.vo.BuildReadFileVo;
+import com.mysql.jdbc.StringUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.util.StringUtil;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -120,9 +122,9 @@ public class BuilderFileFuncFactory {
 
                 sheet = wb.getSheetAt(i);
                 System.out.println("当前读取的是:"+sheet.getSheetName());
-                 
-                if (sheet.getSheetName().indexOf("Sheet") > -1 || sheet.getSheetName().indexOf("说明") > -1) {
-                    System.out.println(sheet.getSheetName() + " 没有读取!!!");
+                
+                if (sheet.getSheetName().indexOf("Sheet") > -1 || StringUtil.hasMultibyte(sheet.getSheetName())) {
+                    System.out.println(sheet.getSheetName() + ": 没有读取!!!");
                     continue;
                 }
 
@@ -180,7 +182,7 @@ public class BuilderFileFuncFactory {
                                     }
 
                                     fieldName.append("\t\t*/\n");
-                                    fieldName.append("\t\tprivate var " + cellStr + ":String;\n\n");
+                                    fieldName.append("\t\tpublic var " + cellStr + ":String;\n\n");
 
                                     fieldContent.append("\t\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");
 

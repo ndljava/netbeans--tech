@@ -203,10 +203,11 @@ public class BuilderImp {
 
         while (keys.hasNext()) {
             key = keys.next();
-            System.out.println(key);
+            System.out.println(key + ":完成");
             //System.out.println(rs.get(key).getFieldName());
 
             replaceTmp(key, rs.get(key));
+
 
 
             writeFile(key);
