@@ -92,15 +92,14 @@ public class BuilderFileFuncFactory {
      * key 为文件名 
      */
     public static Map<String, BuildReadFileVo> readExcelFile(File f) {
-        System.out.println("解析excel" + f.getAbsolutePath());
 
         try {
             Workbook wb = WorkbookFactory.create(new FileInputStream(f));
 
             int sheetCount = wb.getNumberOfSheets();
 
-            System.out.println("读取excel文件" + f.getName());
-            System.out.println("总共" + sheetCount + "个sheet");
+            System.out.println("读取excel文件:" + f.getAbsolutePath());
+            System.out.println("总共:" + sheetCount + "个sheet");
 
 
             Sheet sheet;
@@ -120,7 +119,8 @@ public class BuilderFileFuncFactory {
             for (int i = 0; i < sheetCount; i++) {
 
                 sheet = wb.getSheetAt(i);
-
+                System.out.println("当前读取的是:"+sheet.getSheetName());
+                 
                 if (sheet.getSheetName().indexOf("Sheet") > -1 || sheet.getSheetName().indexOf("说明") > -1) {
                     System.out.println(sheet.getSheetName() + " 没有读取!!!");
                     continue;
@@ -132,7 +132,6 @@ public class BuilderFileFuncFactory {
                 for (Iterator<Row> irow = sheet.rowIterator(); irow.hasNext();) {
 
                     row = irow.next();
-
 
                     for (Iterator<Cell> icell = row.cellIterator(); icell.hasNext();) {
 
