@@ -6,7 +6,6 @@ package com.cn.build;
 
 import com.cn.buildTemp.BuildXmlToAs;
 import com.cn.vo.BuildReadFileVo;
-import com.mysql.jdbc.StringUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
