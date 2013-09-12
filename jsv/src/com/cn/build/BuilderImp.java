@@ -63,7 +63,7 @@ public class BuilderImp {
 
         File f;
         if (tmpStr.startsWith("/")) {
-            f = new File(ClassLoader.getSystemClassLoader().getResource("//").getFile() + "com/cn/buildTemp/" + tmpStr);
+            f = new File(ClassLoader.getSystemClassLoader().getResource("//").getFile() + "com/cn/build/" + tmpStr);
         } else {
             f = new File(tmpStr);
         }
@@ -83,6 +83,7 @@ public class BuilderImp {
 
             br.close();
 
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -97,7 +98,7 @@ public class BuilderImp {
 
         filename = "T" + fn.substring(0, 1).toUpperCase() + fn.substring(1);
         content = content.replaceAll("#classname#", filename);
-
+        
         content = content.replace("#fieldvalue#", vo.getFieldContent().toString()).replace("#fieldname#", vo.getFieldName().toString());
     }
 
