@@ -4,7 +4,6 @@
  */
 package com.cn.build;
 
-import com.cn.build.BuilderFileFuncFactory;
 import com.cn.buildTemp.BuildXmlToAs;
 import com.cn.ndl.enums.BuilderFileEnum;
 import com.cn.vo.BuildReadFileVo;
@@ -15,11 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
@@ -62,7 +58,7 @@ public class BuilderImp {
 
         File f;
         if (tmpStr.startsWith("/")) {
-            f = new File(ClassLoader.getSystemClassLoader().getResource("//").getFile() + "com/cn/buildTemp/" + tmpStr);
+            f = new File(ClassLoader.getSystemClassLoader().getResource("//").getFile() + "com/cn/build/" + tmpStr);
         } else {
             f = new File(tmpStr);
         }
@@ -82,6 +78,7 @@ public class BuilderImp {
 
             br.close();
 
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BuildXmlToAs.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -96,7 +93,7 @@ public class BuilderImp {
 
         filename = "T" + fn.substring(0, 1).toUpperCase() + fn.substring(1);
         content = content.replaceAll("#classname#", filename);
-
+        
         content = content.replace("#fieldvalue#", vo.getFieldContent().toString()).replace("#fieldname#", vo.getFieldName().toString());
     }
 
