@@ -32,7 +32,6 @@ public class Jsv {
 
             while ((i = is.read(b)) != -1) {
                 System.out.println(new String(b, "gb2312"));
-                
             }
 
 

@@ -188,7 +188,7 @@ public class BuilderFileFuncFactory {
 
                                 if (isCommentRow && isFieldRow && cellStr != null) {
 
-                                    System.out.println(cellStr+"|"+cell.getColumnIndex()+"|"+row.getRowNum() );
+//                                    System.out.println(cellStr+"|"+cell.getColumnIndex()+"|"+row.getRowNum() );
 //                                    System.out.println(sheet.getRow(row.getRowNum() - 1));
 //                                    System.out.println(sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()));
 //                                    System.out.println(sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue());
@@ -221,7 +221,6 @@ public class BuilderFileFuncFactory {
                                 }
                                 break;
                         }
-
                     }
 
                     //解析完成,压入
@@ -239,11 +238,9 @@ public class BuilderFileFuncFactory {
                     if (isCommentRow) {
                         isFieldRow = true;
                     }
-
                 }
 
                 //一个sheet就是一个文件
-
             }
 
             return vec;
