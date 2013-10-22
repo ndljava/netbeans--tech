@@ -159,6 +159,7 @@ public class BuilderFileFuncFactory {
                                 cellStr = cell.getRichStringCellValue().getString();
 
                                 if (isCommentRow && isFieldRow && cellStr != null && sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()) != null) {
+                                    
 //                                    System.out.println(cellStr);
 //                                    System.out.println(sheet.getRow(row.getRowNum() - 1));
 //                                    System.out.println(sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()));
@@ -195,6 +196,7 @@ public class BuilderFileFuncFactory {
                         }
                     }
 
+                    //解析完成,压入
                     if (isCommentRow && isFieldRow) {
                         vec.put(sheet.getSheetName(), new BuildReadFileVo(fieldName, fieldContent));
 
