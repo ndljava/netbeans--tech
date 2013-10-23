@@ -74,10 +74,8 @@ public class BuilderFileFuncFactory {
             }
 
             Map<String, BuildReadFileVo> vec = new HashMap<String, BuildReadFileVo>();
-
             vec.put(f.getName().replace(".xml", ""), new BuildReadFileVo(fieldName, fieldContent));
-
-
+            
             return vec;
 
         } catch (DocumentException ex) {
