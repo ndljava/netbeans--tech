@@ -34,7 +34,6 @@ public class Jsv {
                 System.out.println(new String(b, "gb2312"));
             }
 
-
         } catch (IOException ex) {
             Logger.getLogger(Jsv.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

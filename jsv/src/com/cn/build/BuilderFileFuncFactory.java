@@ -99,8 +99,8 @@ public class BuilderFileFuncFactory {
          * 特殊情况
          */
         Map<String, Integer> filterMap = new HashMap<String, Integer>();
-        filterMap.put("missionDate", 2);
-        filterMap.put("Hallows", 1);
+        filterMap.put("missionDate", 3);
+        filterMap.put("Hallows", 2);
         filterMap.put("dropPacket", -1);
 
 
@@ -156,7 +156,7 @@ public class BuilderFileFuncFactory {
 
                     row = irow.next();
 
-                    if (isCommentRow && isFieldRow && rowNum > 0) {
+                    if (isCommentRow && isFieldRow && rowNum >1) {
                         rowNum--;
                         System.out.println(sheet.getSheetName() + "是多行!!!");
                         continue;
@@ -194,7 +194,7 @@ public class BuilderFileFuncFactory {
 //                                    System.out.println(sheet.getRow(row.getRowNum() - 1).getCell(cell.getColumnIndex()).getRichStringCellValue());
 
                                     fieldName.append("\t\t/**\n");
-                                    for (int l = 1; l <= multiline; l++) {
+                                    for (int l = multiline; l >=1 ; l--) {
                                         if (sheet.getRow(row.getRowNum() - l).getCell(cell.getColumnIndex()) != null && sheet.getRow(row.getRowNum() - l).getCell(cell.getColumnIndex()).getRichStringCellValue() != null) {
 
                                             String preCell = sheet.getRow(row.getRowNum() - l).getCell(cell.getColumnIndex()).getRichStringCellValue().getString();

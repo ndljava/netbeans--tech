@@ -10,12 +10,21 @@ package com.cn.thread;
  */
 public class TestRunnable implements Runnable {
 
+    private int k = 0;
+    public boolean bo = false;
+
     @Override
     public void run() {
         // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        for (int i = 0; i < 30; i++) {
-            System.out.println(Thread.currentThread().getName() + " " + i + "ok");
+
+        while (true) {
+            if (bo) {
+                System.out.println(Thread.currentThread().getName() + " " + k + "ok");
+                k--;
+            } else {
+                System.out.println(Thread.currentThread().getName() + " " + k + "ok");
+                k++;
+            }
         }
     }
 
@@ -25,7 +34,7 @@ public class TestRunnable implements Runnable {
             System.out.println(Thread.currentThread().getName() + " " + i);
             if (i == 10) {
                 TestRunnable t = new TestRunnable();
-                
+
                 new Thread(t, "子线程0").start();
                 new Thread(t, "子线程1").start();
             }
