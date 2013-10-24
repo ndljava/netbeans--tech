@@ -12,7 +12,7 @@ import java.util.Vector;
  */
 public class StepExec {
 
-    public Vector vec;
+    private Vector vec;
     
     public StepExec() {
         this.vec=new Vector();

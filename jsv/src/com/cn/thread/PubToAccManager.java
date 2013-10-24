@@ -15,61 +15,80 @@ public class PubToAccManager {
 
     private final StepExec st;
 
-    public PubToAccManager() {
-        this.st = new StepExec();
-
-        for (int i = 0; i < 10; i++) {
-            st.addVec(i+"");
-        }
+    public PubToAccManager(StepExec st) {
+        this.st = st;
     }
 
-    public void pub() {
-        int i = 0;
-        while (true) {
-            synchronized (st) {
-//                try {
-//                   // st.wait();
-//
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(PubToAccManager.class.getName()).log(Level.SEVERE, null, ex);
-//                }
+    public synchronized void pub() {
 
-                st.addVec(i+"");
 
-                i++;
-
-                if (st.getVec().size() > 10) {
-                    st.notify();
-                }
-
+        while (this.st.getVec().size() > 0) {
+            try {
+                System.out.println("111111");
+                this.wait();
+                System.out.println("22222");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PubToAccManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
+        for (int i = 0; i < 20; i++) {
+            this.st.addVec("心动过缓" + i);
+        }
+        
+        
+        this.notify();
+
+
     }
 
-    public void acc() {
-        while (true) {
-            synchronized (st) {
-                
-                st.popVec();
+    public synchronized void acc() {
 
-                if (st.getVec().size() < 1) {
-                    st.notify();
-                }
+        while (this.st.getVec().size() == 0) {
+            try {
+                this.wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PubToAccManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        this.st.popVec();
+        this.notify();
 
 
     }
 
     public static void main(String[] args) {
 
-        PubToAccManager pam2 = new PubToAccManager();
-        pam2.acc();
+        StepExec se = new StepExec();
+        final PubToAccManager pa = new PubToAccManager(se);
 
-        PubToAccManager pam = new PubToAccManager();
-        pam.pub();
-        
-        System.out.println("ffff");
+       while(true){
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    pa.pub();
+                }
+            }).start();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    pa.acc();
+                }
+            }).start();
+            
+            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PubToAccManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
     }
 }
