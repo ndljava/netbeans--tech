@@ -27,12 +27,11 @@ public class ftptest {
         
         Vector<String> vs=new Vector<String>();
         vs.add(".");
-        vs.add(".svn");
         vs.add("..");
         
         fc.setFilterVec(vs);
         
-        fc.itoreFiles("/");
+        fc.forFiles("/");
         
 //        try {
 //            FTPFile[] ff=fsc.listDirectories();

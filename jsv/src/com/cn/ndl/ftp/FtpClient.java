@@ -60,25 +60,32 @@ public class FtpClient {
 
         try {
             fclient.login(user, pwd);
+            fclient.setListHiddenFiles(false);
             fclient.changeWorkingDirectory("/");
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-
-    public void itoreFiles(String path) {
+    
+    public void forFiles(String path){
+        this.itoreFiles(fclient, path);
+    }
+    
+    public void itoreFiles(FTPSClient fsc,String path) {
 
         System.out.println(path);
 
         try {
-            fclient.changeWorkingDirectory(path);
+            fsc.changeWorkingDirectory(path);
+            fsc.enterLocalPassiveMode();
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
-            FTPFile[] ffs = fclient.mlistDir();
+
+            FTPFile[] ffs = fsc.mlistDir();
 
             for (FTPFile ff : ffs) {
 
@@ -88,33 +95,44 @@ public class FtpClient {
 
                 if (ff.isFile()) {
                     System.out.println("文件" + ff.getName() + "|" + ff.getRawListing());
-                } else {
-                    System.out.println("目录" + ff.getName() + "|" + ff.getRawListing());
-                    this.itoreFiles(path + "/" + ff.getName() + "/");
+                    System.out.println("content:" + this.readFile(path+"/"+ff.getName()));
                 }
             }
 
-//            ffs = fclient.listDirectories();
-//            for (FTPFile ff : ffs) {
-//                System.out.println("目录" + ff.getName() + "|" + ff.getRawListing());
-//               // this.itoreFiles(path + "/" + ff.getName());
-//            }
+            ffs = fsc.listDirectories();
 
+            for (FTPFile ff : ffs) {
+
+                if (this.isFilter(ff.getName())) {
+                    continue;
+                }
+
+                if (ff.isDirectory()) {
+                    System.out.println("目录" + ff.getName() + "|" + ff.getRawListing());
+                    this.itoreFiles(fsc,path + "/" + ff.getName() + "/");
+                }
+            }
 
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
     }
 
     public String readFile(String path) {
         try {
+
+            System.out.println(path + "----");
             InputStream is = fclient.retrieveFileStream(path);
+
+            System.out.println(is.available());
 
             byte[] b = new byte[is.available()];
             is.read(b, 0, is.available());
+            
+            String s = new String(b);
 
-            return new String(b);
+            return s;
 
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,7 +153,7 @@ public class FtpClient {
     private Boolean isFilter(String fname) {
 
         for (int i = 0; i < this.filterVec.size(); i++) {
-             
+
             if (fname.equals(this.filterVec.get(i))) {
                 return true;
             }
