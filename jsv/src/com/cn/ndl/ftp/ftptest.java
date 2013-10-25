@@ -33,8 +33,8 @@ public class ftptest {
         fc.setFilterVec(vs);
         
 //        fc.readFile("//dragon//GameUI//AutionWnd.xml");
-        fc.readFile("//dragon//GameUI//BackpackWnd.xml");
-//        fc.forFiles("/");
+//        fc.readFile("//dragon//GameUI//BackpackWnd.xml");
+        fc.forFiles("/");
         
 //        try {
 //            FTPFile[] ff=fsc.listDirectories();

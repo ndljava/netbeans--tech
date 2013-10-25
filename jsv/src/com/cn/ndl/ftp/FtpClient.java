@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
+import org.apache.commons.net.util.TrustManagerUtils;
 
 /**
  *
@@ -61,38 +62,38 @@ public class FtpClient {
         try {
             fclient.login(user, pwd);
             fclient.setListHiddenFiles(false);
-            
-            
+
             fclient.setConnectTimeout(99999);
-            fclient.setFileType(fileType);
-            
+
             fclient.changeWorkingDirectory("/");
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-    public void forFiles(String path){
-        this.itoreFiles(fclient, path);
+
+    public void forFiles(String path) {
+        this.itoreFiles(path);
     }
-    
-    public void itoreFiles(FTPSClient fsc,String path) {
+
+    public void itoreFiles(String path) {
 
         System.out.println(path);
 
         try {
-            fsc.changeWorkingDirectory(path);
-            fsc.enterLocalPassiveMode();
+            fclient.changeWorkingDirectory(path);
+            fclient.enterLocalPassiveMode();
+            fclient.setListHiddenFiles(false);
+
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-        
+
+
         try {
 
-            FTPFile[] ffs = fsc.mlistDir();
+            FTPFile[] ffs = fclient.mlistDir();
 
             for (FTPFile ff : ffs) {
 
@@ -102,11 +103,19 @@ public class FtpClient {
 
                 if (ff.isFile()) {
                     System.out.println("文件" + ff.getName() + "|" + ff.getRawListing());
-                    System.out.println("content:" + this.readFile(path+"/"+ff.getName()));
+                    System.out.println("content:" + this.readFile(path + "/" + ff.getName()));
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+
+
             }
 
-            ffs = fsc.listDirectories();
+            ffs = fclient.listDirectories();
 
             for (FTPFile ff : ffs) {
 
@@ -116,38 +125,66 @@ public class FtpClient {
 
                 if (ff.isDirectory()) {
                     System.out.println("目录" + ff.getName() + "|" + ff.getRawListing());
-                    this.itoreFiles(fsc,path + "/" + ff.getName() + "/");
+                    this.itoreFiles(path + "/" + ff.getName() + "/");
                 }
             }
 
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 
     }
-    
 
     public String readFile(String path) {
+
+        FTPSClient fsc = new FTPSClient();
         try {
+            fsc.connect("192.168.10.16");
+            fsc.login("config", "leyou999");
+            fsc.changeWorkingDirectory(path.substring(0, path.lastIndexOf("//")));
+            fsc.setDefaultTimeout(999);
+            fsc.setDataTimeout(999);
 
-            System.out.println(path + "----");
-            InputStream is = fclient.retrieveFileStream(path);
+            fsc.setBufferSize(1024);
 
-            System.out.println(is.available());
-
-            byte[] b = new byte[is.available()];
-            is.read(b, 0, is.available());
-            
-            String s = new String(b);
-            System.out.println(s);
-            return s;
-
+        } catch (SocketException ex) {
+            Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
-        return "";
+        try {
+            //FTPFile ff=fsc.list(path)
+            System.out.println("==" + fsc.listDirectories(path).length + "exist" + path);
+        } catch (IOException ex) {
+            Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        String s = "";
+//        int i = 3;
+
+        try {
+
+            System.out.println(path + "----");
+            InputStream is = fsc.retrieveFileStream(path);
+
+            System.out.println(is.available());
+
+            byte[] b = new byte[is.available()];
+            is.read(b, 0, is.available());
+            //is.close();
+
+            s = new String(b);
+
+            fsc.logout();
+            fsc.disconnect();
+        } catch (IOException ex) {
+            Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return s;
     }
 
     public void close() {
