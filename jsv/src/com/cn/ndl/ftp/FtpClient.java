@@ -11,6 +11,7 @@ import java.net.SocketException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
 import org.apache.commons.net.util.TrustManagerUtils;
@@ -141,11 +142,12 @@ public class FtpClient {
         try {
             fsc.connect("192.168.10.16");
             fsc.login("config", "leyou999");
-            fsc.changeWorkingDirectory(path.substring(0, path.lastIndexOf("//")));
+            fsc.changeWorkingDirectory("/");
             fsc.setDefaultTimeout(999);
             fsc.setDataTimeout(999);
-
-            fsc.setBufferSize(1024);
+            fsc.setFileType(FTP.BINARY_FILE_TYPE);
+            
+//            fsc.setBufferSize(1024);
 
         } catch (SocketException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
