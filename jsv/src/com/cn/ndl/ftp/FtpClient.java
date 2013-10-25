@@ -61,6 +61,11 @@ public class FtpClient {
         try {
             fclient.login(user, pwd);
             fclient.setListHiddenFiles(false);
+            
+            
+            fclient.setConnectTimeout(99999);
+            fclient.setFileType(fileType);
+            
             fclient.changeWorkingDirectory("/");
         } catch (IOException ex) {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,6 +88,8 @@ public class FtpClient {
             Logger.getLogger(FtpClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+        
         try {
 
             FTPFile[] ffs = fsc.mlistDir();
@@ -118,6 +125,7 @@ public class FtpClient {
         } 
 
     }
+    
 
     public String readFile(String path) {
         try {
@@ -131,7 +139,7 @@ public class FtpClient {
             is.read(b, 0, is.available());
             
             String s = new String(b);
-
+            System.out.println(s);
             return s;
 
         } catch (IOException ex) {
