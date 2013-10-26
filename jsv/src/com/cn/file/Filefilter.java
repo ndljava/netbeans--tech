@@ -29,7 +29,7 @@ public class Filefilter {
 
     public void readFiles(String path) {
         sbc = new StringBuffer();
-        this.forFiles(strDir);
+        this.forFiles(path);
 
     }
 
@@ -46,6 +46,30 @@ public class Filefilter {
 
             } else if (fs[i].isDirectory() && fs[i].getName().indexOf("Table") == -1) {
                 forFiles(fs[i].getAbsolutePath());
+            }
+
+        }
+
+    }
+
+    public void readlocalFiles(String path) {
+        sbc = new StringBuffer();
+        this.forlocalFiles(path);
+
+    }
+
+    private void forlocalFiles(String path) {
+
+        File f = new File(path);
+        File[] fs = f.listFiles();
+
+        for (int i = 0; i < fs.length; i++) {
+
+            if (fs[i].isFile() && fs[i].getName().endsWith(".mxml") && !fs[i].getName().endsWith("preRes.xml")) {
+                System.out.println(fs[i].getAbsolutePath());
+                this.readFile(fs[i]);
+            } else if (fs[i].isDirectory()) {
+                forlocalFiles(fs[i].getAbsolutePath());
             }
 
         }
@@ -69,18 +93,18 @@ public class Filefilter {
 
             while (fff != null) {
                 if (!fff.trim().startsWith("<mx:Image") && !fff.trim().startsWith("<mx:Style") && !fff.trim().startsWith("<!--") && (fff.indexOf("icon") > -1 || fff.indexOf("source") > -1)) {
-                    //System.out.println(fff);
+                   // System.out.println(fff);
 
-                    Pattern pt = Pattern.compile("(source|icon)=\"(.*?)\"");
+                    Pattern pt = Pattern.compile("(source|icon)=\"(@Embed\\(source=\')?(.*?)\'?\\)\"");
                     Matcher mc = pt.matcher(fff);
                     while (mc.find()) {
-                        fpatten = mc.group(2);
-                        // System.out.println(mc.groupCount());
+                        fpatten = mc.group(3);
+                        //System.out.println(fpatten+"=="+mc.groupCount());
                         if (fpatten.endsWith(".css")) {
-                            break;
+                            break; 
                         }
 
-                        fpatten = fpatten.replace("assets/", "");
+                        fpatten = fpatten.replaceAll("\\.\\.\\/", "").replace("assets/", "");
 
                         if (this.xmlStr.indexOf(fpatten) == -1) {
 
@@ -90,10 +114,7 @@ public class Filefilter {
                                 System.out.println("<res cacheType=\"2\" url=\"" + fpatten + "\"/>");
 
                             }
-
-
                         }
-
                     }
 
                 }
@@ -148,11 +169,13 @@ public class Filefilter {
 
     public static void main(String[] args) {
 
-        String strDir = "E:\\uitable\\dragon";
+//        String strDir = "E:\\uitable\\dragon";
+        String strDir = "E:\\IGG\\gameUI\\DragonGameUI\\src";
         Filefilter ff = new Filefilter();
 
         ff.readTempFile("F:\\table\\config\\preRes.xml");
-        ff.readFiles(strDir);
+//        ff.readFiles(strDir);
+        ff.readlocalFiles(strDir);
         //ff.readCssFile("F:\\table\\skin\\flex_skins.css");
 
 
