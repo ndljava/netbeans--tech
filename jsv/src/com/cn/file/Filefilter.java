@@ -21,6 +21,7 @@ public class Filefilter {
 
     private String strDir = "E:\\uitable\\dragon";
     private String xmlStr;
+    private String cssStr;
     private StringBuffer sbc;
 
     public Filefilter() {
@@ -61,13 +62,18 @@ public class Filefilter {
 
             while (fff != null) {
                 if (fff.indexOf("icon") > -1 || fff.indexOf("source") > -1) {
-                    // System.out.println(fff);
-                    // fpatten= Pattern.
+                   // System.out.println(fff);
+
                     Pattern pt = Pattern.compile("(source|icon)=\"(.*?)\"");
                     Matcher mc = pt.matcher(fff);
                     while (mc.find()) {
                         fpatten = mc.group(2);
-                        //System.out.println(mc.groupCount());
+                       // System.out.println(mc.groupCount());
+                        if (fpatten.endsWith(".css")) {
+                            break;
+                        }
+
+                        fpatten = fpatten.replace("assets/", "");
 
                         if (this.xmlStr.indexOf(fpatten) == -1) {
 
@@ -95,6 +101,13 @@ public class Filefilter {
         } catch (IOException ex) {
             Logger.getLogger(Filefilter.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    public void readCssFile(String path) {
+
+        this.readFile(new File(path));
+
 
     }
 
@@ -132,7 +145,9 @@ public class Filefilter {
         Filefilter ff = new Filefilter();
 
         ff.readTempFile("F:\\table\\config\\preRes.xml");
-        ff.readFiles(strDir);
+       // ff.readFiles(strDir);
+        ff.readCssFile("F:\\table\\skin\\flex_skins.css");
+
 
     }
 }
