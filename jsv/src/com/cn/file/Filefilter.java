@@ -61,14 +61,14 @@ public class Filefilter {
             fff = raf.readLine();
 
             while (fff != null) {
-                if (fff.indexOf("icon") > -1 || fff.indexOf("source") > -1) {
-                   // System.out.println(fff);
+                if (!fff.trim().startsWith("<mx:Image") && !fff.trim().startsWith("<mx:Style") && !fff.trim().startsWith("<!--") && (fff.indexOf("icon") > -1 || fff.indexOf("source") > -1)) {
+                    //System.out.println(fff);
 
                     Pattern pt = Pattern.compile("(source|icon)=\"(.*?)\"");
                     Matcher mc = pt.matcher(fff);
                     while (mc.find()) {
                         fpatten = mc.group(2);
-                       // System.out.println(mc.groupCount());
+                        // System.out.println(mc.groupCount());
                         if (fpatten.endsWith(".css")) {
                             break;
                         }
@@ -145,8 +145,8 @@ public class Filefilter {
         Filefilter ff = new Filefilter();
 
         ff.readTempFile("F:\\table\\config\\preRes.xml");
-       // ff.readFiles(strDir);
-        ff.readCssFile("F:\\table\\skin\\flex_skins.css");
+        ff.readFiles(strDir);
+        //ff.readCssFile("F:\\table\\skin\\flex_skins.css");
 
 
     }
