@@ -4,21 +4,12 @@
  */
 package com.cn.cn.db;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 /**
  *
  * @author Administrator
  */
 public class ncSql2 {
-    public static void main(String[] args) {
-        
-        
-        
-        
-    }
 
-     
+    public static void main(String[] args) {
+    }
 }

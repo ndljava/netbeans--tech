@@ -249,7 +249,7 @@ public class BuildFileView extends javax.swing.JFrame {
         isTmp = 0;
         fileselectPanel.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fileselectPanel.setForeground(Color.red);
-        fileselectPanel.setSelectedFile(new File("E:\\svn\\策划目录\\游戏策划案\\B数据表\\道具表"));
+        fileselectPanel.setSelectedFile(new File("E:\\svn\\策划目录\\游戏策划案\\B数据表"));
         fileselectPanel.showOpenDialog(this);
         
     }//GEN-LAST:event_selectBtnActionPerformed

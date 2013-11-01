@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -214,7 +213,8 @@ public class BuilderFileFuncFactory {
                                     fieldContent.append("\t\t\tthis." + cellStr + "=data.@" + cellStr + ";\n");
                                 }
 
-                                if (cell.getColumnIndex()==0 && (cellStr.toLowerCase().indexOf("index") > -1 || cellStr.toLowerCase().indexOf("id") > -1) && !isCommentRow) {
+                                if ((cellStr.toLowerCase().indexOf("index") > -1 || cellStr.toLowerCase().indexOf("id") > -1) && !isCommentRow) {
+                                //if (cell.getColumnIndex()==0 &&(cellStr.toLowerCase().indexOf("index") > -1 || cellStr.toLowerCase().indexOf("id") > -1) && !isCommentRow) {
                                     isCommentRow = true;
                                 }
                                 break;

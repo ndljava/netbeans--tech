@@ -29,10 +29,10 @@ public class Ncll {
         }
         //?characterEncoding=GBK
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "root");
             Statement stat = con.createStatement();
 
-            ResultSet rs = stat.executeQuery("select * from todo");
+            ResultSet rs = stat.executeQuery("select * from user");
             while (rs.next()) {
                 System.out.print(rs.getString(1)+"|");
                 System.out.print(rs.getString(2)+"|");
