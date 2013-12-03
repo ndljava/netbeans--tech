@@ -6,7 +6,6 @@ package com.cn.ndl.ftp;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.SocketException;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
-import org.apache.commons.net.util.TrustManagerUtils;
 
 /**
  *
