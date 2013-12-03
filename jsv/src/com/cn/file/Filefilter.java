@@ -76,13 +76,6 @@ public class Filefilter {
 
     }
 
-    /**
-     *
-     *
-     *
-     *
-     *
-     */
     private void readFile(File f) {
         try {
 
@@ -133,10 +126,7 @@ public class Filefilter {
     }
 
     public void readCssFile(String path) {
-
         this.readFile(new File(path));
-
-
     }
 
     public void readTempFile(String path) {
