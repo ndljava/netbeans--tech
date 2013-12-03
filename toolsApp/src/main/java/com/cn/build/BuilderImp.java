@@ -62,7 +62,7 @@ public class BuilderImp {
 
         File f;
         if (tmpStr.startsWith("/")) {
-            f = new File(ClassLoader.getSystemClassLoader().getResource("//").getFile() + "com/cn/build/" + tmpStr);
+            f = new File(this.getTargetPath()+ "com/cn/build/" + tmpStr);
         } else {
             f = new File(tmpStr);
         }
@@ -82,7 +82,6 @@ public class BuilderImp {
 
             System.out.println(tmpContent+"====");
             br.close();
-
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BuilderImp.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +94,7 @@ public class BuilderImp {
     private void replaceTmp(String fn, BuildReadFileVo vo) {
 
         content = tmpContent;
-        System.out.println(content+"=="+this.tmpContent);
+//        System.out.println(content+"=="+this.tmpContent);
 
         filename = "T" + fn.substring(0, 1).toUpperCase() + fn.substring(1);
         content = content.replaceAll("#classname#", filename);
@@ -133,7 +132,7 @@ public class BuilderImp {
             BufferedWriter bw = new BufferedWriter(new FileWriter(outpath, false));
             bw.write(content);
             bw.flush();
-            bw.close();;
+            bw.close();
             textArea.append(outpath + "\n");
 
         } catch (IOException ex) {
@@ -212,8 +211,13 @@ public class BuilderImp {
 
             writeFile(key);
         }
-
-
+    }
+    
+    private String getTargetPath(){
+        String str=ClassLoader.getSystemResource("//").getFile();
+        str=str.substring(0, str.substring(0, str.length()-10).lastIndexOf("/"));
+        
+        return str+"/src/main/java/";
     }
 
     public String getPathStr() {
