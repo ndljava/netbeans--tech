@@ -11,6 +11,11 @@ package com.cn.graph;
 public class Dijkstra {
 
     public static void main(String[] args) {
+
+        int[][] graph; //=new int[5][5];
+ 
+ 
+        
         
         
         
