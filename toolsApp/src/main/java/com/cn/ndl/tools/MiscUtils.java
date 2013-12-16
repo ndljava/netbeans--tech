@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.cnjava;
+package com.cn.ndl.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 
 /**
- *
+ *获取硬盘序列号
  * @author Administrator
  */
 public class MiscUtils {

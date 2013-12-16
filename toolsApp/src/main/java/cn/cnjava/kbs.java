@@ -12,6 +12,12 @@ import java.io.File;
  */
 public class kbs {
 
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) {
 
         P2 ps = new P2();
@@ -24,8 +30,6 @@ public class kbs {
         p.setI(6);
         System.out.println(p.getS() + "/" + p.getD() + "/" + p.getI());
         System.out.println(ps.toString());
-
-
 
         File f = new File("c:");
 
