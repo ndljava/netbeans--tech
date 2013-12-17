@@ -129,8 +129,9 @@ public class BuilderImp {
 
         try {
 
-            BufferedWriter bw = new BufferedWriter(new FileWriter(outpath, false));
-            bw.write(content);
+            
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outpath));
+            bw.write(new String(content.getBytes(),"utf-8"));
             bw.flush();
             bw.close();
             textArea.append(outpath + "\n");
