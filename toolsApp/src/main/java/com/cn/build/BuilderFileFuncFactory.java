@@ -98,20 +98,20 @@ public class BuilderFileFuncFactory {
         filterMap.put("Hallows", 2);
         filterMap.put("dropPacket", -1);
 
+        System.out.println("读取excel文件:" + f.getAbsolutePath());
         Workbook wb = null;
 
         try {
             wb = WorkbookFactory.create(new FileInputStream(f));
-        } catch (IOException ex) {
-            Logger.getLogger(BuilderFileFuncFactory.class.getName()).log(Level.SEVERE, null, ex);
+
         } catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException ex) {
+            Logger.getLogger(BuilderFileFuncFactory.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(BuilderFileFuncFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
         int sheetCount = wb.getNumberOfSheets();
 
-        System.out.println("读取excel文件:" + f.getAbsolutePath());
         System.out.println("总共:" + sheetCount + "个sheet");
 
         Sheet sheet;

@@ -66,8 +66,12 @@ public class Filefilter {
         for (int i = 0; i < fs.length; i++) {
 
             if (fs[i].isFile() && fs[i].getName().endsWith(".mxml") && !fs[i].getName().endsWith("preRes.xml")) {
-                System.out.println(fs[i].getAbsolutePath());
-                this.readFile(fs[i]);
+//                System.out.println(fs[i].getAbsolutePath());
+
+//                if (fs[i].getAbsolutePath().indexOf("arena") > -1) {
+                    System.out.println(fs[i].getAbsolutePath());
+                    this.readFile(fs[i]);
+//                }
             } else if (fs[i].isDirectory()) {
                 forlocalFiles(fs[i].getAbsolutePath());
             }
@@ -86,15 +90,17 @@ public class Filefilter {
 
             while (fff != null) {
                 if (!fff.trim().startsWith("<mx:Image") && !fff.trim().startsWith("<mx:Style") && !fff.trim().startsWith("<!--") && (fff.indexOf("icon") > -1 || fff.indexOf("source") > -1)) {
-                   // System.out.println(fff);
+//                    System.out.println(fff);
 
-                    Pattern pt = Pattern.compile("(source|icon)=\"(@Embed\\(source=\')?(.*?)\'?\\)\"");
+//                    Pattern pt = Pattern.compile("(source|icon)=\"(@Embed\(source=\')?(.*?)\'?\)?\"");
+                    Pattern pt = Pattern.compile("(source|icon)=\"(.*?)\"");
                     Matcher mc = pt.matcher(fff);
                     while (mc.find()) {
-                        fpatten = mc.group(3);
-                        //System.out.println(fpatten+"=="+mc.groupCount());
+                        fpatten = mc.group(2);
+
+//                        System.out.println(fpatten+"=="+mc.groupCount());
                         if (fpatten.endsWith(".css")) {
-                            break; 
+                            break;
                         }
 
                         fpatten = fpatten.replaceAll("\\.\\.\\/", "").replace("assets/", "");
