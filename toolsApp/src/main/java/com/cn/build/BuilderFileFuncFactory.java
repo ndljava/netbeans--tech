@@ -95,8 +95,9 @@ public class BuilderFileFuncFactory {
          */
         Map<String, Integer> filterMap = new HashMap<String, Integer>();
         filterMap.put("missionDate", 3);
-        filterMap.put("Hallows", 2);
-        filterMap.put("dropPacket", -1);
+        filterMap.put("Hallows", 2); //行数
+        filterMap.put("dropPacket", -1); //不读
+//        filterMap.put("monster", -1);
 
         System.out.println("读取excel文件:" + f.getAbsolutePath());
         Workbook wb = null;

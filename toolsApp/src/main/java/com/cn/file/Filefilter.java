@@ -166,6 +166,7 @@ public class Filefilter {
     public static void main(String[] args) {
 
 //        String strDir = "E:\\uitable\\dragon";
+//        String strDir = "E:\\uitable\\dragon";
         String strDir = "E:\\IGG\\gameUI\\DragonGameUI\\src";
         Filefilter ff = new Filefilter();
 
