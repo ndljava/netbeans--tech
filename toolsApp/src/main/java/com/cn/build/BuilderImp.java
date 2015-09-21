@@ -131,9 +131,16 @@ public class BuilderImp {
 
             
             BufferedWriter bw = new BufferedWriter(new FileWriter(outpath));
-            bw.write(new String(content.getBytes(),"utf-8"));
+            
+            System.out.println(content);
+            bw.write(new String(content));
+//            bw.write(new String(content.getBytes(),"UTF-8"));
+            
             bw.flush();
             bw.close();
+         
+            
+                
             textArea.append(outpath + "\n");
 
         } catch (IOException ex) {
@@ -185,7 +192,7 @@ public class BuilderImp {
                 }
                 break;
             case BuilderFileEnum.BUILD_FILE_TYPE_EXCEL:
-                if (f.getPath().endsWith("xls") || f.getPath().endsWith("xlsx")) {
+                if ((f.getPath().endsWith("xls") || f.getPath().endsWith("xlsx")) && f.getPath().indexOf("~")==-1 && f.getPath().indexOf("$")==-1) {
                     rs = BuilderFileFuncFactory.readExcelFile(f);
                 } else {
                     return;

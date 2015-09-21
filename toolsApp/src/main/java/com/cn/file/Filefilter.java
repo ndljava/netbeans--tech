@@ -173,8 +173,7 @@ public class Filefilter {
         ff.readTempFile("F:\\table\\config\\preRes.xml");
 //        ff.readFiles(strDir);
         ff.readlocalFiles(strDir);
-        //ff.readCssFile("F:\\table\\skin\\flex_skins.css");
-
+        //ff.readCssFile("F:\\table\\skin\\flex_skins.css")
 
     }
 }

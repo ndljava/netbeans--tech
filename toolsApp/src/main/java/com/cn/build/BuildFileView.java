@@ -31,13 +31,15 @@ public class BuildFileView extends javax.swing.JFrame {
         initComponents();
         init();
         initUI();
+        
+        this.setLocationRelativeTo(null);
     }
 
     private void init() {
         bxa = new BuilderImp();
         bxa.setTextArea(textContent);
         bxa.setOutputDir(this.outPath);
-        
+         
     }
 
     private void initUI() {
