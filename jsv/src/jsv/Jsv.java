@@ -28,11 +28,12 @@ public class Jsv {
             is = new URL("http://www.163.com").openConnection().getInputStream();
 
             int i = 0;
-            byte b[] = new byte[1024];
+            byte b[] = new byte[10240];
 
             while ((i = is.read(b)) != -1) {
                 System.out.println(new String(b, "gb2312"));
-
+                System.out.println(i);
+                b = new byte[10240];
             }
 
 
