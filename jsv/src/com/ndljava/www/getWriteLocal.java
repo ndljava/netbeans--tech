@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class getWriteLocal {
             String stype = head.get("Content-Type").get(0);
             System.out.println(stype);
             String charset = "utf-8";
-            if (stype.indexOf("=") > -1) {
+            if (stype.contains("=")) {
                 charset = stype.split("=")[1];
                 //System.out.println(charset);
             }
@@ -54,7 +55,7 @@ public class getWriteLocal {
             int i = 0;
             while (sc != null) {
 //                if (sc.indexOf("href=") > -1 || sc.indexOf("src=") > -1) {
-                // System.out.println("ctx:"+sc);
+//                     System.out.println("ctx:"+sc);
 
 //                    Pattern pat = Pattern.compile(reg);
 //                    Matcher mt = pat.matcher(sc);
@@ -65,11 +66,13 @@ public class getWriteLocal {
 //                }
                 sb.append(sc);
                 sc = br.readLine();
+                i++;
             }
             is.close();
 
 //            System.out.println(sb);
-//            System.out.println(sb.length());
+            System.out.println(sb.length());
+            System.out.println(sb.toString().split("\r|\n").length + ":" + i);
             return sb.toString();
         } catch (MalformedURLException ex) {
             Logger.getLogger(GetWwwContent.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,10 +87,28 @@ public class getWriteLocal {
         Map<String, String> lreg = new HashMap<String, String>();
 
         String reg = "href=\"(.*?)\"";
-        lreg.put("href", reg);
+        //lreg.put("href", reg);
 
         reg = "src=\"(.*?)\"";
-        lreg.put("src", reg);
+        //lreg.put("src", reg);
+
+        reg = "src=\"(.+?\\.js)\"";
+        //lreg.put("js", reg);
+
+        reg = "href=\"([^\"]+?)\\.css\"";
+        //lreg.put("css", reg);
+
+        reg = "src=\"([^\"]+?\\.png)\"";
+        lreg.put("png", reg);
+
+        reg = "src=\"([^\"]+?\\.jpg)\"";
+        lreg.put("jpg", reg);
+
+        reg = "src=\"([^\"]+?\\.gif)\"";
+        lreg.put("gif", reg);
+
+        reg = "src=\"([^\"]+?\\.(jpg|png|jpeg|gif))\"";
+        lreg.put("pic", reg);
 
         String scontent = getContent(url);
 
@@ -109,7 +130,10 @@ public class getWriteLocal {
     }
 
     public static void main(String[] args) {
+        long l = new Date().getTime();
+        System.out.println(l);
         pattenTarget("http://localhost:8080/");
+        System.out.println(new Date().getTime() - l);
         //pattenTarget("http://www.xinjiangnet.com.cn/mspd/");
         //pattenTarget("http://www.qq.com");
         //pattenTarget("http://www.163.com");
