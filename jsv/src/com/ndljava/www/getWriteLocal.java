@@ -71,8 +71,8 @@ public class getWriteLocal {
             is.close();
 
 //            System.out.println(sb);
-            System.out.println(sb.length());
-            System.out.println(sb.toString().split("\r|\n").length + ":" + i);
+//            System.out.println(sb.length());
+
             return sb.toString();
         } catch (MalformedURLException ex) {
             Logger.getLogger(GetWwwContent.class.getName()).log(Level.SEVERE, null, ex);
