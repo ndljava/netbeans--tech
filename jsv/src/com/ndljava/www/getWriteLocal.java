@@ -94,17 +94,17 @@ public class getWriteLocal {
         Pattern pat = null;
         Matcher mt = null;
         int i = 0;
-        for(String keys:lreg.keySet()){
+        for (String keys : lreg.keySet()) {
             pat = Pattern.compile(lreg.get(keys));
             mt = pat.matcher(scontent);
-            System.out.println("================================================");
+            System.out.println("==============================================================================================================================");
             i = 0;
             while (mt.find()) {
                 //System.out.println(mt.group());
                 System.out.println(mt.group(1));
                 i++;
             }
-            System.out.println(keys+" patten:" + i);
+            System.out.println(keys + " patten:" + i);
         }
     }
 
