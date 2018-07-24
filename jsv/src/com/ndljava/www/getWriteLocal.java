@@ -5,7 +5,6 @@
  */
 package com.ndljava.www;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +12,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +32,7 @@ public class getWriteLocal {
         StringBuffer sb = new StringBuffer();
 
         try {
+
             URL u = new URL(url);
             URLConnection uc = u.openConnection();
 
@@ -72,13 +71,13 @@ public class getWriteLocal {
 
 //            System.out.println(sb);
 //            System.out.println(sb.length());
-
             return sb.toString();
         } catch (MalformedURLException ex) {
             Logger.getLogger(GetWwwContent.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(GetWwwContent.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return sb.toString();
     }
 
@@ -121,12 +120,34 @@ public class getWriteLocal {
             System.out.println("==============================================================================================================================");
             i = 0;
             while (mt.find()) {
-                //System.out.println(mt.group());
+//                System.out.println(mt.group());
                 System.out.println(mt.group(1));
                 i++;
             }
             System.out.println(keys + " patten:" + i);
         }
+        
+        parseData(scontent);
+    }
+
+    private static void parseData(String ctx) {
+
+        String content = ctx;
+
+        int num=0;
+        int i = 0;
+        int ei=0;
+        while(content.indexOf("<div",i)>-1){
+            num++;
+            
+            ei=i;
+            System.out.println(i+":"+num);
+            i=content.indexOf("<div",i)+4;
+            
+            System.out.println(content.substring(ei, i));
+        }
+
+        System.out.println("num:"+num);
     }
 
     public static void main(String[] args) {
