@@ -8,6 +8,7 @@ package com.ndljava.lucene;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,12 +33,12 @@ public class createIndex {
         try {
             String paths = "g:/";
 
-            File indexDir = new File(paths+"/lucc");
+            File indexDir = new File(paths + "/lucc");
             File dataDir = new File(paths);
 
             Analyzer luceneAnalyzer = new StandardAnalyzer();
 
-            Directory dic = FSDirectory.open(Paths.get(paths+"/lucc"));
+            Directory dic = FSDirectory.open(Paths.get(paths + "/lucc"));
             IndexWriterConfig iwc = new IndexWriterConfig(luceneAnalyzer);
             IndexWriter indexWriter = new IndexWriter(dic, iwc);
 
@@ -57,21 +58,31 @@ public class createIndex {
                 Field fileName = new TextField("fileName", f.getName(), Field.Store.YES);
                 Field filePath = new TextField("filePath", f.getCanonicalPath(), Field.Store.YES);
                 Field fileSize = new TextField("fileSize", f.getUsableSpace() + "", Field.Store.YES);
-                
-                FileReader fr=new FileReader(f);
-                 
+
+                FileReader fr = new FileReader(f);
+//                RandomAccessFile raf = new RandomAccessFile(f, "r");
+//                String sc = raf.readUTF();
+//                System.out.println(sc);
+//                String sct = null;
+//                while (sc != null) {
+//                    //sct += new String(sc.getBytes("utf-8"),"utf-8");
+//                    sct +=sc;
+//                    sc = raf.readUTF();
+//                }
+
+//                Field fileContent = new TextField("fileContent", sc, Field.Store.YES);
                 Field fileContent = new TextField("fileContent", fr);
 
                 doc.add(fileName);
                 doc.add(filePath);
                 doc.add(fileSize);
                 doc.add(fileContent);
-                
+
                 indexWriter.addDocument(doc);
             }
 
             indexWriter.numDocs();
-            
+
             indexWriter.close();
         } catch (IOException ex) {
             Logger.getLogger(createIndex.class.getName()).log(Level.SEVERE, null, ex);
